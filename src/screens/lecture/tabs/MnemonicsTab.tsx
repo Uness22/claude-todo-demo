@@ -149,7 +149,7 @@ export default function MnemonicsTab({ lecture }: { lecture: Lecture }) {
       {editing && (
         <Card>
           <CardTitle title="✏️ Edit memory trick" />
-          <textarea className="textarea" style={{ minHeight: 90 }} value={draft} onChange={(e) => setDraft(e.target.value)} />
+          <textarea dir="auto" className="textarea" style={{ minHeight: 90 }} value={draft} onChange={(e) => setDraft(e.target.value)} />
           <div className="row" style={{ marginTop: 10 }}>
             <button
               className="btn primary"

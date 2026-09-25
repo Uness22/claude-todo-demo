@@ -109,6 +109,7 @@ export default function BrainDump({ lecture, onDone }: { lecture: Lecture; onDon
           <T k="rememberAll" />
         </p>
         <textarea
+          dir="auto"
           className="textarea"
           style={{ minHeight: 160, textAlign: 'start' }}
           value={val}

@@ -365,6 +365,7 @@ export default function QuizTab({ lecture }: { lecture: Lecture }) {
       {/* Text answers */}
       {isText ? (
         <textarea
+          dir="auto"
           className="textarea"
           style={{ minHeight: 110 }}
           value={text}

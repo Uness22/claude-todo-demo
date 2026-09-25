@@ -71,6 +71,26 @@ body {
 
 html[dir='rtl'] body { font-family: var(--font-ar); }
 
+/* ---------- Bidi hygiene (Arabic/English mixed content) ----------
+   Each text block detects its own direction from its first strong
+   character, so Arabic content inside an English UI (and vice versa)
+   never renders with reversed word order. */
+p, li, h1, h2, h3, h4, h5, h6,
+.quote, pre, .q-prompt, .bubble, .kb li, .hint, .quote,
+.fcard-face .q, .fcard-face .a, .phase-item, .timer-sub,
+.stat .sub, .cheat, .cheat li, .arrow-flow, .flow-step .body,
+.textarea, .input, .q-opt, .countdown, .grade-btn, .chip,
+.muted, .small-txt, .body-txt, .bubble, .stat .k {
+  unicode-bidi: plaintext;
+}
+
+/* Arabic must never inherit negative letter-spacing (breaks ligatures) */
+html[dir='rtl'] h1, html[dir='rtl'] h2, html[dir='rtl'] h3, html[dir='rtl'] h4,
+html[dir='rtl'] .brand, html[dir='rtl'] .stat .v, html[dir='rtl'] .timer-clock,
+html[dir='rtl'] .countdown .n, html[dir='rtl'] .q-prompt, html[dir='rtl'] .pill {
+  letter-spacing: normal;
+}
+
 h1, h2, h3, h4 { line-height: 1.25; margin: 0 0 0.5rem; font-weight: 700; letter-spacing: -0.01em; }
 h1 { font-size: 1.7rem; }
 h2 { font-size: 1.3rem; }
@@ -259,8 +279,8 @@ html[dir='rtl'] .quote { border-radius: 10px 0 0 10px; }
 .flag.verify { background: var(--danger-soft); color: var(--danger); }
 
 .bi { display: flex; flex-direction: column; gap: 1px; }
-.bi-ar { font-size: 0.92em; color: var(--text-muted); }
-html[dir='rtl'] .bi-en { direction: ltr; text-align: start; }
+.bi-ar { font-size: 0.92em; color: var(--text-muted); direction: rtl; unicode-bidi: isolate; }
+html[dir='rtl'] .bi-en { direction: ltr; text-align: start; unicode-bidi: isolate; }
 
 /* ---------- Stat cards ---------- */
 .stat { display: flex; flex-direction: column; gap: 3px; }

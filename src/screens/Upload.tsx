@@ -149,6 +149,7 @@ export default function Upload({ go }: { go: (r: Route) => void }) {
           <Card>
             <CardTitle title={<T k="orPaste" />} sub={lang === 'ar' ? 'الصق نص المحاضرة أو ملاحظاتك كاملة — بدون الحاجة لتحريرها' : 'Paste the full text or your notes — no cleanup needed'} />
             <textarea
+              dir="auto"
               className="textarea"
               style={{ minHeight: 220 }}
               value={text}

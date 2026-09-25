@@ -104,6 +104,7 @@ export default function RecallTab({ lecture }: { lecture: Lecture }) {
               {!revealed ? (
                 <>
                   <textarea
+                    dir="auto"
                     className="textarea"
                     style={{ minHeight: 120 }}
                     value={answer}

@@ -8,6 +8,20 @@
     <title>StudyFlow — Learn · Memorize · Recall · Master</title>
   </head>
   <body>
+    <!-- Apply direction/theme BEFORE first paint to avoid RTL flash or wrong base direction -->
+    <script>
+      (function () {
+        try {
+          var s = JSON.parse(localStorage.getItem('studyflow.v1') || '{}');
+          var st = (s && s.settings) || {};
+          var lang = st.lang || 'en';
+          var root = document.documentElement;
+          root.setAttribute('lang', lang === 'ar' ? 'ar' : 'en');
+          root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+          root.setAttribute('data-theme', st.theme === 'light' ? 'light' : 'dark');
+        } catch (e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

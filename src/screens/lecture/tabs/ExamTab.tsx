@@ -236,6 +236,7 @@ export default function ExamTab({ lecture }: { lecture: Lecture }) {
         </div>
       ) : (
         <textarea
+          dir="auto"
           className="textarea"
           style={{ minHeight: 110 }}
           value={answeredNow}
