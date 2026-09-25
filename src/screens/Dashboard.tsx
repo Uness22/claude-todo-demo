@@ -36,7 +36,7 @@ export default function Dashboard({ go }: { go: (r: Route) => void }) {
       <div className="row between" style={{ marginBottom: 18 }}>
         <div>
           <h1>
-            {state.settings.userName ? `${greeting()}, ${state.settings.userName}` : greeting()} 👋
+            {state.settings.userName ? `${greeting(lang)}, ${state.settings.userName}` : greeting(lang)} 👋
           </h1>
           <div className="muted">
             <T k="tagline" />
@@ -77,7 +77,7 @@ export default function Dashboard({ go }: { go: (r: Route) => void }) {
             <T k="streak" />
           </div>
           <div className="v">🔥 {state.streak.current}</div>
-          <div className="sub">Best {state.streak.longest} {tr('days', lang)}</div>
+          <div className="sub">{tr('best', lang)} {state.streak.longest} {tr('days', lang)}</div>
         </div>
       </div>
 
@@ -138,7 +138,7 @@ export default function Dashboard({ go }: { go: (r: Route) => void }) {
               <Pill kind="success">💪 {strong.slice(0, 3).map((t) => t.topic).join(' · ') || '—'}</Pill>
             </div>
           ) : (
-            <div className="muted small-txt">Take a quiz to reveal weak topics.</div>
+            <div className="muted small-txt">{tr('weakTakeQuiz', lang)}</div>
           )}
           <div className="row" style={{ marginTop: 10 }}>
             <button className="btn small" onClick={() => go({ name: 'progress' })}>
@@ -241,9 +241,9 @@ export default function Dashboard({ go }: { go: (r: Route) => void }) {
   )
 }
 
-function greeting(): string {
+function greeting(lang: 'en' | 'ar' | 'bi'): string {
   const h = new Date().getHours()
-  if (h < 12) return 'Good morning'
-  if (h < 18) return 'Good afternoon'
-  return 'Good evening'
+  if (h < 12) return tr('greetMorning', lang)
+  if (h < 18) return tr('greetAfternoon', lang)
+  return tr('greetEvening', lang)
 }

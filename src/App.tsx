@@ -57,7 +57,7 @@ function Sidebar({ route, go }: { route: Route; go: (r: Route) => void }) {
         <div>
           {tr('streak', lang)}: 🔥 {state.streak.current} {tr('days', lang)}
         </div>
-        <div style={{ marginTop: 4, opacity: 0.7 }}>AI Learning + Recall System</div>
+        <div style={{ marginTop: 4, opacity: 0.7 }}>{tr('footerTagline', lang)}</div>
       </div>
     </aside>
   )

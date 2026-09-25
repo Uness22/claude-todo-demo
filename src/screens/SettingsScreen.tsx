@@ -85,17 +85,15 @@ export default function SettingsScreen() {
       </Card>
 
       <Card>
-        <CardTitle title="About StudyFlow" />
+        <CardTitle title={tr('aboutTitle', lang)} />
         <p className="small-txt muted">
           <T k="tagline" />
         </p>
         <p className="small-txt muted">
-          AI Learning + Memorization + Active Recall System — not an AI summary generator. Every feature answers one
-          question: <b>“How can I remember this when I need it in the exam?”</b>
+          {tr('aboutBlurb', lang)}
         </p>
         <p className="small-txt muted">
-          Academic accuracy: unclear content is flagged <b>UNCLEAR</b>, external claims are marked{' '}
-          <b>NEEDS VERIFICATION</b> — the app never invents facts.
+          {tr('aboutAcademic', lang)}
         </p>
       </Card>
     </div>

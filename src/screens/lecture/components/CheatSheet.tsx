@@ -1,10 +1,14 @@
 import { Fragment } from 'react'
 import type { Lecture } from '../../../types'
+import { useStore } from '../../../store'
+import { tr } from '../../../i18n'
 import { T } from '../../../components/ui'
 import { generateMnemonics } from '../../../lib/mnemonic'
 
 /** One-page cheat sheet: everything that matters before the exam. */
 export default function CheatSheet({ lecture }: { lecture: Lecture }) {
+  const { state } = useStore()
+  const lang = state.settings.lang
   const a = lecture.analysis
 
   // Best mnemonic: student's saved choice → top generated option
@@ -38,7 +42,7 @@ export default function CheatSheet({ lecture }: { lecture: Lecture }) {
         </button>
       </div>
 
-      <h3>⭐ {`MUST KNOW`}</h3>
+      <h3>⭐ {tr('mustKnowShort', lang)}</h3>
       <ul>
         {(has(a.verbatim) ? a.verbatim.slice(0, 4) : a.bigPicture.slice(0, 3)).map((v, i) => (
           <li key={i}>{v}</li>
@@ -47,7 +51,7 @@ export default function CheatSheet({ lecture }: { lecture: Lecture }) {
 
       <div className="row" style={{ gap: 24, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 240 }}>
-          <h3>🔑 KEY TERMS</h3>
+          <h3>🔑 {tr('keyTermsL', lang)}</h3>
           <div className="kv">
             {a.terms.slice(0, 8).map((t) => (
               <span key={t.term}>
@@ -56,7 +60,7 @@ export default function CheatSheet({ lecture }: { lecture: Lecture }) {
             ))}
           </div>
 
-          <h3>📖 DEFINITIONS</h3>
+          <h3>📖 {tr('defsL', lang)}</h3>
           <div className="kv">
             {a.definitions.slice(0, 6).map((d) => (
               <Fragment key={d.id}>
@@ -78,7 +82,7 @@ export default function CheatSheet({ lecture }: { lecture: Lecture }) {
         </div>
 
         <div style={{ flex: 1, minWidth: 240 }}>
-          <h3>🧭 STEPS</h3>
+          <h3>🧭 {tr('stepsL', lang)}</h3>
           {a.steps.length ? (
             <div className="arrow-flow">
               {a.steps.map((s, i) => (
@@ -94,7 +98,7 @@ export default function CheatSheet({ lecture }: { lecture: Lecture }) {
             <div className="muted">—</div>
           )}
 
-          <h3>🧮 FORMULAS</h3>
+          <h3>🧮 {tr('formulasL', lang)}</h3>
           <ul>
             {a.formulas.map((f) => (
               <li key={f.id} className="mono">
@@ -104,7 +108,7 @@ export default function CheatSheet({ lecture }: { lecture: Lecture }) {
             {!a.formulas.length ? <li className="muted">—</li> : null}
           </ul>
 
-          <h3>🧠 MNEMONICS</h3>
+          <h3>🧠 {tr('mnemonicsL', lang)}</h3>
           {mnText ? (
             <div className="quote">
               <b>{mnText}</b>

@@ -22,7 +22,10 @@ export default function TutorTab({ lecture }: { lecture: Lecture }) {
     () => ({
       id: 'welcome',
       role: 'bot',
-      text: `🎓 I'm your tutor for “${lecture.title}”.\nI answer ONLY from this lecture — if it's not in the material, I'll say NEEDS VERIFICATION.\nAsk me anything (English or عربي).`,
+      text:
+        lang === 'ar'
+          ? `🎓 أنا معلّمك لمحاضرة “${lecture.title}”. \nأجيب فقط من هذه المحاضرة — وإن لم تكن في المادة سأقول: تحتاج تحقّقًا (NEEDS VERIFICATION). \nاسألني أي شيء (عربي أو English).`
+          : `🎓 I'm your tutor for “${lecture.title}”. \nI answer ONLY from this lecture — if it's not in the material, I'll say NEEDS VERIFICATION. \nAsk me anything (English or عربي).`,
       at: Date.now(),
     }),
     [lecture.title],
@@ -54,7 +57,7 @@ export default function TutorTab({ lecture }: { lecture: Lecture }) {
         right={
           <label className="row small-txt" style={{ cursor: 'pointer', gap: 6 }}>
             <input type="checkbox" checked={hideAnswers} onChange={(e) => setHideAnswers(e.target.checked)} />
-            🙈 hide answers
+            🙈 <T k="hideAnswers" />
           </label>
         }
       />

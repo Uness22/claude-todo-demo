@@ -30,6 +30,23 @@ const KIND_LABEL: Record<string, string> = {
   oral: 'Oral Recall',
 }
 
+function kindLabel(kind: string, lang: 'en' | 'ar' | 'bi'): string {
+  const map: Record<string, string> = {
+    tf: 'kindTf',
+    fill: 'kindFill',
+    matching: 'kindMatching',
+    short: 'kindShort',
+    list: 'kindList',
+    definition: 'kindDefinition',
+    explain: 'kindExplain',
+    compare: 'kindCompare',
+    scenario: 'kindScenario',
+    case: 'kindCase',
+    oral: 'kindOral',
+  }
+  return map[kind] ? tr(map[kind], lang) : KIND_LABEL[kind] || kind
+}
+
 export default function QuizTab({ lecture }: { lecture: Lecture }) {
   const { state, recordAttempt } = useStore()
   const lang = state.settings.lang
@@ -210,9 +227,9 @@ export default function QuizTab({ lecture }: { lecture: Lecture }) {
                   return (
                     <div key={wq.id} className="card" style={{ padding: 12, boxShadow: 'none' }}>
                       <div className="small-txt" style={{ fontWeight: 700 }}>
-                        [{KIND_LABEL[wq.kind]}] {truncate(wq.prompt, 130)}
+                        [{kindLabel(wq.kind, lang)}] {truncate(wq.prompt, 130)}
                       </div>
-                      {a?.userText ? <div className="small-txt muted">You: {truncate(a.userText, 90)}</div> : null}
+                      {a?.userText ? <div className="small-txt muted">{tr('you', lang)}: {truncate(a.userText, 90)}</div> : null}
                       <div className="small-txt" style={{ color: 'var(--success)' }}>✓ {truncate(wq.answer, 130)}</div>
                     </div>
                   )
@@ -262,7 +279,7 @@ export default function QuizTab({ lecture }: { lecture: Lecture }) {
             <div className="row" style={{ gap: 6, marginTop: 12 }}>
               {[...new Set(bank.map((b) => b.kind))].map((k) => (
                 <Pill key={k} kind="accent">
-                  {KIND_LABEL[k]}
+                  {kindLabel(k, lang)}
                 </Pill>
               ))}
             </div>
@@ -290,7 +307,7 @@ export default function QuizTab({ lecture }: { lecture: Lecture }) {
           {idx + 1} / {pool.length}
         </Pill>
         <div className="row" style={{ gap: 6 }}>
-          <Pill kind="accent">{KIND_LABEL[q.kind]}</Pill>
+          <Pill kind="accent">{kindLabel(q.kind, lang)}</Pill>
           <Pill kind={q.difficulty === 'hard' ? 'danger' : q.difficulty === 'medium' ? 'warn' : 'success'}>{tr(q.difficulty, lang)}</Pill>
           <Pill>{q.topic}</Pill>
         </div>

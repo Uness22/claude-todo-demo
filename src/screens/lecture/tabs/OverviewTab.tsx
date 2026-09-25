@@ -36,16 +36,16 @@ export default function OverviewTab({ lecture, go, onTab }: Props) {
   }, [a, cs.total, lecture.mnemonicChoice, recalls.length, attempts, state.cards])
 
   const flow = [
-    { id: 'upload', t: 'Upload Lecture', d: 'PDF · PPT · Word · text' },
-    { id: 'analyze', t: 'Analyze', d: 'Topics, definitions, lists, numbers' },
-    { id: 'understand', t: 'Understand', d: 'Big Picture + Easy Explanation' },
-    { id: 'simplify', t: 'Simplify', d: 'Exam Knowledge (MUST KNOW)' },
-    { id: 'mnemonics', t: 'Create Mnemonics', d: 'Memory sentences & stories' },
-    { id: 'flashcards', t: 'Flashcards', d: `${cs.total} cards generated` },
-    { id: 'recall', t: 'Active Recall', d: 'Answer first — then reveal' },
-    { id: 'quiz', t: 'Quiz', d: '12 question types' },
-    { id: 'review', t: 'Review', d: 'Spaced repetition schedule' },
-    { id: 'mastery', t: 'Mastery Score', d: 'Strong vs weak topics' },
+    { id: 'upload', t: tr('flowUpload', lang), d: tr('flowUploadD', lang) },
+    { id: 'analyze', t: tr('flowAnalyze', lang), d: tr('flowAnalyzeD', lang) },
+    { id: 'understand', t: tr('flowUnderstand', lang), d: tr('flowUnderstandD', lang) },
+    { id: 'simplify', t: tr('flowSimplify', lang), d: tr('flowSimplifyD', lang) },
+    { id: 'mnemonics', t: tr('flowMnemonics', lang), d: tr('flowMnemonicsD', lang) },
+    { id: 'flashcards', t: tr('flowFlashcards', lang), d: `${cs.total} ${tr('cardsGenerated', lang)}` },
+    { id: 'recall', t: tr('flowRecall', lang), d: tr('flowRecallD', lang) },
+    { id: 'quiz', t: tr('flowQuiz', lang), d: tr('flowQuizD', lang) },
+    { id: 'review', t: tr('flowReview', lang), d: tr('flowReviewD', lang) },
+    { id: 'mastery', t: tr('flowMastery', lang), d: tr('flowMasteryD', lang) },
   ]
 
   let activeSet = false
