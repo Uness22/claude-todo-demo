@@ -66,7 +66,7 @@ export default function QuizTab({ lecture }: { lecture: Lecture }) {
 
   const q = pool[idx]
   // stable shuffled definition column for matching questions
-  const shuffledPairs = useMemo(() => (q?.pairs ? shuffle(q.pairs) : []), [q?.pairs])
+  const shuffledPairs = useMemo(() => (q?.pairs ? shuffle(q.pairs) : []), [q])
 
   function start(usePool?: Question[]) {
     const p = usePool || shuffle(bank).slice(0, count)

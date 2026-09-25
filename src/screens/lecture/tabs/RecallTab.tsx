@@ -30,6 +30,7 @@ export default function RecallTab({ lecture }: { lecture: Lecture }) {
 
   function gradeAll(g: Grade) {
     if (!q) return
+    // oxlint-disable-next-line react/purity -- Date.now() runs inside the click handler, not during render
     recordRecall({ lectureId: lecture.id, question: q.prompt, grade: g, at: Date.now() })
     setResults((r) => [...r, g])
     setRevealed(false)

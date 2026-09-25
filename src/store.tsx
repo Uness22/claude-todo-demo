@@ -1,3 +1,5 @@
+/* oxlint-disable react/only-export-components */
+// Mixed exports by design: the StoreProvider component + the useStore/useLang hooks it exposes.
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { AppState, Flashcard, Grade, Lecture, QuizAttempt, RecallEntry, TutorMessage } from './types'

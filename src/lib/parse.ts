@@ -124,6 +124,7 @@ export async function extractText(file: File): Promise<ParseResult> {
   // last resort: try as text
   try {
     const text = (await file.text()).trim()
+    // oxlint-disable-next-line no-control-regex -- intentional: reject binary files whose first bytes are control chars
     if (text && !/[\u0000-\u0008]/.test(text.slice(0, 500))) {
       return { ok: true, text, note: 'Loaded as plain text' }
     }

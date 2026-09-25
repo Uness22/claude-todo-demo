@@ -121,7 +121,7 @@ function tryDefinition(line: string): { term: string; text: string } | null {
   }
 
   // X is a/an ... / X refers to ... / X is defined as ... / X means ...
-  m = s.match(/^(?:The\s+)?([A-Za-z\u0600-\u06FF][\w\u0600-\u06FF\-]*(?:\s*\([^)]{0,60}\))?(?:\s+[\w\u0600-\u06FF\-]+){0,5}?)\s+(?:is defined as|is known as|refers to|are defined as|means|is|are)\s+(?:a|an|the)?\s*(?:simple\s+|basic\s+|type\s+of\s+|kind\s+of\s+|form\s+of\s+|system\s+for\s+|method\s+of\s+)?(.{15,})$/)
+  m = s.match(/^(?:The\s+)?([A-Za-z\u0600-\u06FF][\w\u0600-\u06FF-]*(?:\s*\([^)]{0,60}\))?(?:\s+[\w\u0600-\u06FF-]+){0,5}?)\s+(?:is defined as|is known as|refers to|are defined as|means|is|are)\s+(?:a|an|the)?\s*(?:simple\s+|basic\s+|type\s+of\s+|kind\s+of\s+|form\s+of\s+|system\s+for\s+|method\s+of\s+)?(.{15,})$/)
   if (m && validTerm(cleanTerm(m[1])) && !/^(is|are)\b/i.test(m[1])) {
     const term = cleanTerm(m[1])
     const rest = m[2]
@@ -371,11 +371,11 @@ export function analyze(raw: string): Analysis {
   for (const { s } of bodySentences) {
     let m = s.match(/(?:the\s+)?difference\s+between\s+([\w\u0600-\u06FF\s\-/]{2,40}?)\s+and\s+([\w\u0600-\u06FF\s\-/]{2,40}?)(?:\s+is|\s*:|\.|,|$)/i)
     if (m) { pushComp(m[1], m[2], s); continue }
-    m = s.match(/\b([\w\u0600-\u06FF\-]{2,30}(?:\s+[\w\u0600-\u06FF\-]{1,20}){0,3}?)\s+(?:vs\.?|versus)\s+([\w\u0600-\u06FF\-]{2,30}(?:\s+[\w\u0600-\u06FF\-]{1,20}){0,3})/i)
+    m = s.match(/\b([\w\u0600-\u06FF-]{2,30}(?:\s+[\w\u0600-\u06FF-]{1,20}){0,3}?)\s+(?:vs\.?|versus)\s+([\w\u0600-\u06FF-]{2,30}(?:\s+[\w\u0600-\u06FF-]{1,20}){0,3})/i)
     if (m) { pushComp(m[1], m[2], s); continue }
     if (/\bwhereas\b|\bwhile\b|\bunlike\b|\bin contrast\b|\bcompared (?:to|with)\b/i.test(s) && /\bwhile\b|\bwhereas\b|\bunlike\b/i.test(s)) {
       // capture around whereas/while/unlike (word-boundary start, optional comma)
-      m = s.match(/\b([\w\u0600-\u06FF\-][\w\u0600-\u06FF\s\-]{2,40}?)\s*,?\s+(?:whereas|while|unlike)\s+([\w\u0600-\u06FF\-][\w\u0600-\u06FF\s\-]{2,40})/i)
+      m = s.match(/\b([\w\u0600-\u06FF-][\w\u0600-\u06FF\s-]{2,40}?)\s*,?\s+(?:whereas|while|unlike)\s+([\w\u0600-\u06FF-][\w\u0600-\u06FF\s-]{2,40})/i)
       if (m) {
         // label with the nearest noun phrases (last ~3 words before / first ~3 after)
         const aWords = m[1].trim().split(/\s+/)

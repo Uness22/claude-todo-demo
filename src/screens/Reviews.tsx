@@ -16,13 +16,15 @@ export default function Reviews({ go }: { go: (r: Route) => void }) {
   const { state, gradeCard } = useStore()
   const lang = state.settings.lang
   const due = useMemo(() => dueCards(state.cards), [state.cards])
+  // Snapshot "now" once per mount so the upcoming list renders purely from state.
+  const [now] = useState(() => Date.now())
   const upcoming = useMemo(
     () =>
       [...state.cards]
-        .filter((c) => c.due > Date.now())
+        .filter((c) => c.due > now)
         .sort((a, b) => a.due - b.due)
         .slice(0, 8),
-    [state.cards],
+    [state.cards, now],
   )
 
   const [queue, setQueue] = useState<string[] | null>(null)

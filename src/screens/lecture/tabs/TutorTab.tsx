@@ -18,6 +18,8 @@ export default function TutorTab({ lecture }: { lecture: Lecture }) {
     boxRef.current?.scrollTo({ top: boxRef.current.scrollHeight, behavior: 'smooth' })
   }, [msgs.length, thinking])
 
+  // Snapshot the timestamp once; the welcome text itself stays memoized on title+lang.
+  const [welcomeAt] = useState(() => Date.now())
   const welcome = useMemo<TutorMessage>(
     () => ({
       id: 'welcome',
@@ -26,15 +28,16 @@ export default function TutorTab({ lecture }: { lecture: Lecture }) {
         lang === 'ar'
           ? `🎓 أنا معلّمك لمحاضرة “${lecture.title}”. \nأجيب فقط من هذه المحاضرة — وإن لم تكن في المادة سأقول: تحتاج تحقّقًا (NEEDS VERIFICATION). \nاسألني أي شيء (عربي أو English).`
           : `🎓 I'm your tutor for “${lecture.title}”. \nI answer ONLY from this lecture — if it's not in the material, I'll say NEEDS VERIFICATION. \nAsk me anything (English or عربي).`,
-      at: Date.now(),
+      at: welcomeAt,
     }),
-    [lecture.title],
+    [lecture.title, lang, welcomeAt],
   )
 
   function send(text: string) {
     const t = text.trim()
     if (!t) return
     setInput('')
+    // oxlint-disable-next-line react/purity -- Date.now() runs inside the send() event handler, not during render
     const userMsg: TutorMessage = { id: uid('msg'), role: 'user', text: t, at: Date.now() }
     addTutorMsg(lecture.id, userMsg)
     setThinking(true)

@@ -1,3 +1,5 @@
+/* oxlint-disable react/only-export-components */
+// Mixed exports by design: translation helpers (tr/trPair/detectLang) + the Bi display component.
 import type { ReactNode } from 'react'
 import type { Lang } from './types'
 
@@ -128,7 +130,7 @@ export const strings: Dict = {
   startDump: ['Start 1-Minute Brain Dump', 'ابدأ التخزين العقلي بدقيقة'],
   timeUp: ["Time's up!", 'انتهى الوقت!'],
   fiveMinReview: ['5-MINUTE REVIEW', 'مراجعة 5 دقائق'],
-  fiveMinGoal: ['Refresh the entire lecture in 5 minutes.', 'نعش المحاضرة كاملة في 5 دقائق.'],
+  fiveMinGoal: ['Refresh the entire lecture in 5 minutes.', 'راجع المحاضرة كاملة في 5 دقائق.'],
   quickRecall: ['Quick Recall Questions', 'أسئلة استرجاع سريعة'],
   commonTraps: ['Common Exam Traps', 'مزالق الاختبار الشائعة'],
   mustKnowShort: ['MUST KNOW', 'يجب حفظه'],
@@ -172,6 +174,14 @@ export const strings: Dict = {
   examNotes: ['Exam Notes', 'ملاحظات الاختبار'],
   onePage: ['One Page', 'صفحة واحدة'],
   fiveMin: ['5-Minute Review', 'مراجعة 5 دقائق'],
+  // Rapid review (5-min)
+  rrSteps: ['STEPS + NUMBERS', 'خطوات + أرقام'],
+  rrLists: ['LISTS + COMPARISONS', 'قوائم + مقارنات'],
+  rrMnem: ['MNEMONIC + EXAM HINTS', 'جملة تذكّر + تلميحات الاختبار'],
+  start: ['Start', 'ابدأ'],
+  page: ['Page', 'صفحة'],
+  prev: ['Previous', 'السابق'],
+  rrDone: ['5 minutes done — lecture refreshed!', 'انتهت 5 دقائق — تمّت مراجعة المحاضرة!'],
   oneMin: ['1-Minute Recall', 'استرجاع دقيقة'],
   level1: ['Level 1 — Big Picture', 'المستوى 1 — الصورة الكبيرة'],
   level2: ['Level 2 — Easy Explanation', 'المستوى 2 — شرح مبسّط'],

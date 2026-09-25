@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Lecture } from '../../../types'
+import { useStore } from '../../../store'
+import { tr } from '../../../i18n'
 import { Pill, T, fmtTime } from '../../../components/ui'
 import { generateMnemonics } from '../../../lib/mnemonic'
 
@@ -11,23 +13,21 @@ const TOTAL = 5 * 60 * 1000 // 5 minutes
  * Big timer + auto-advancing pages of only the highest-value info.
  */
 export default function RapidReview({ lecture, onClose }: { lecture: Lecture; onClose: () => void }) {
+  const { state } = useStore()
+  const lang = state.settings.lang
   const a = lecture.analysis
   const [running, setRunning] = useState(false)
+  const [everStarted, setEverStarted] = useState(false)
   const [left, setLeft] = useState(TOTAL)
-  const [page, setPage] = useState(0)
-  const started = useRef(false)
+  // Manual page override (null = follow the timer).
+  const [manualPage, setManualPage] = useState<number | null>(null)
 
+  // Ticks only; page + completion are derived during render (no effects with setState).
   useEffect(() => {
-    if (!running) return
+    if (!running || left === 0) return
     const iv = window.setInterval(() => setLeft((l) => Math.max(0, l - 1000)), 1000)
     return () => window.clearInterval(iv)
-  }, [running])
-
-  useEffect(() => {
-    const elapsedPct = 1 - left / TOTAL
-    setPage(Math.min(PAGES - 1, Math.max(0, Math.floor(elapsedPct * PAGES))))
-    if (left === 0) setRunning(false)
-  }, [left])
+  }, [running, left])
 
   const list = a.lists.find((l) => l.items.length >= 3)
   const mn = useMemo(() => {
@@ -37,29 +37,29 @@ export default function RapidReview({ lecture, onClose }: { lecture: Lecture; on
 
   const pages: { title: string; items: string[] }[] = [
     {
-      title: '⭐ MUST KNOW',
+      title: `⭐ ${tr('mustKnowShort', lang)}`,
       items: (a.verbatim.length ? a.verbatim.slice(0, 5) : a.bigPicture).slice(0, 5),
     },
     {
-      title: '📖 DEFINITIONS',
+      title: `📖 ${tr('defsL', lang)}`,
       items: a.definitions.slice(0, 6).map((d) => `${d.term} — ${d.text.length > 110 ? d.text.slice(0, 110) + '…' : d.text}`),
     },
     {
-      title: '🧭 STEPS + 🔢 NUMBERS',
+      title: `🧭 ${tr('rrSteps', lang)}`,
       items: [
         ...(a.steps.length ? [a.steps.map((s, i) => `${i + 1}. ${s.title.replace(/^\d+\.\s*/, '')}`).join(' → ')] : []),
         ...a.numbers.slice(0, 4).map((n) => `${n.value}`),
       ],
     },
     {
-      title: '📋 LISTS + COMPARISONS',
+      title: `📋 ${tr('rrLists', lang)}`,
       items: [
         ...a.lists.slice(0, 2).map((l) => `${l.title}: ${l.items.slice(0, 7).join(', ')}`),
         ...a.comparisons.slice(0, 2).map((c) => `${c.a} vs ${c.b}: ${c.text.length > 100 ? c.text.slice(0, 100) + '…' : c.text}`),
       ],
     },
     {
-      title: '🧠 MNEMONIC + EXAM HINTS',
+      title: `🧠 ${tr('rrMnem', lang)}`,
       items: [
         ...(mn ? [mn.text] : []),
         ...a.examHints.slice(0, 5).map((h) => h.text),
@@ -67,9 +67,13 @@ export default function RapidReview({ lecture, onClose }: { lecture: Lecture; on
     },
   ].map((p) => ({ ...p, items: p.items.filter(Boolean) }))
 
+  const elapsedPct = 1 - left / TOTAL
+  const autoPage = Math.min(PAGES - 1, Math.max(0, Math.floor(elapsedPct * PAGES)))
+  const page = manualPage ?? autoPage
   const current = pages[Math.min(page, pages.length - 1)]
+  const active = running && left > 0
 
-  if (!running && left === TOTAL && !started.current) {
+  if (!everStarted && left === TOTAL) {
     return (
       <div className="card">
         <div className="analyzing">
@@ -83,11 +87,11 @@ export default function RapidReview({ lecture, onClose }: { lecture: Lecture; on
           <button
             className="btn primary big"
             onClick={() => {
-              started.current = true
+              setEverStarted(true)
               setRunning(true)
             }}
           >
-            ▶ Start
+            ▶ {tr('start', lang)}
           </button>
           <button className="btn ghost" onClick={onClose}>
             <T k="close" />
@@ -105,10 +109,10 @@ export default function RapidReview({ lecture, onClose }: { lecture: Lecture; on
         </div>
         <div className="row">
           <span className="pill primary">
-            Page {page + 1}/{pages.length}
+            {tr('page', lang)} {page + 1}/{pages.length}
           </span>
           <button className="btn small" onClick={() => setRunning((r) => !r)}>
-            {running ? '⏸' : '▶'}
+            {active ? '⏸' : '▶'}
           </button>
           <button className="btn small danger" onClick={onClose}>
             <T k="close" />
@@ -116,7 +120,7 @@ export default function RapidReview({ lecture, onClose }: { lecture: Lecture; on
         </div>
       </div>
       <div className="progress thin" style={{ margin: '10px 0 16px' }}>
-        <div style={{ width: `${(1 - left / TOTAL) * 100}%` }} />
+        <div style={{ width: `${elapsedPct * 100}%` }} />
       </div>
 
       <h2>{current.title}</h2>
@@ -127,13 +131,21 @@ export default function RapidReview({ lecture, onClose }: { lecture: Lecture; on
       </ul>
 
       <div className="row no-print" style={{ marginTop: 16 }}>
-        <button className="btn small" disabled={page === 0} onClick={() => setPage((p) => Math.max(0, p - 1))}>
-          ← Prev
+        <button
+          className="btn small"
+          disabled={page === 0}
+          onClick={() => setManualPage(Math.max(0, page - 1))}
+        >
+          {lang === 'ar' ? '→' : '←'} {tr('prev', lang)}
         </button>
-        <button className="btn small" disabled={page >= pages.length - 1} onClick={() => setPage((p) => Math.min(pages.length - 1, p + 1))}>
-          Next →
+        <button
+          className="btn small"
+          disabled={page >= pages.length - 1}
+          onClick={() => setManualPage(Math.min(pages.length - 1, page + 1))}
+        >
+          {tr('next', lang)} {lang === 'ar' ? '←' : '→'}
         </button>
-        {left === 0 ? <Pill kind="success">✅ 5 minutes done — lecture refreshed!</Pill> : null}
+        {left === 0 ? <Pill kind="success">✅ {tr('rrDone', lang)}</Pill> : null}
       </div>
     </div>
   )

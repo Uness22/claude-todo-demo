@@ -1,3 +1,5 @@
+/* oxlint-disable react/only-export-components */
+// Mixed exports by design: shared formatting helpers + display components in one design-system module.
 import type { CSSProperties, ReactNode } from 'react'
 import { Bi } from '../i18n'
 import { useLang } from '../store'

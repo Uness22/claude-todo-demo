@@ -33,7 +33,7 @@ export default function OverviewTab({ lecture, go, onTab }: Props) {
     if (state.cards.some((c) => c.lectureId === lecture.id && c.reps > 0)) done.add('review')
     if (attempts.some((x) => x.correct / Math.max(1, x.total) >= 0.8)) done.add('mastery')
     return done
-  }, [a, cs.total, lecture.mnemonicChoice, recalls.length, attempts, state.cards])
+  }, [a, cs.total, lecture.mnemonicChoice, lecture.id, recalls.length, attempts, state.cards])
 
   const flow = [
     { id: 'upload', t: tr('flowUpload', lang), d: tr('flowUploadD', lang) },
