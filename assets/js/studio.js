@@ -219,11 +219,15 @@
     "dilution.html":   { ar: "assets/audio/ar/dilution.mp3",        en: "assets/audio/en/dilution.mp3" },
     "bench.html":      { ar: "assets/audio/ar/bench.mp3",           en: "assets/audio/en/bench.mp3" },
     "microscope.html": { ar: "assets/audio/ar/microscope.mp3",      en: "assets/audio/en/microscope.mp3" },
-    "safety.html":     { en: "assets/audio/en/safety.mp3" },
-    "media.html":      { en: "assets/audio/en/media.mp3" },
-    "pathogens.html":  { en: "assets/audio/en/pathogens.mp3" },
-    "instruments.html":{ en: "assets/audio/en/instruments.mp3" },
-    "curriculum.html": { en: "assets/audio/en/curriculum.mp3" }
+    /* الإنجليزية — الصفحات الثلاث المتبقية + الوحدات الإضافية */
+    "safety.html":     { en: "assets/audio/en/safety.mp3",      ar: "assets/audio/ar/safety.mp3" },
+    "media.html":      { en: "assets/audio/en/media.mp3",       ar: "assets/audio/ar/media.mp3" },
+    "pathogens.html":  { en: "assets/audio/en/pathogens.mp3",   ar: "assets/audio/ar/pathogens.mp3" },
+    "instruments.html":{ en: "assets/audio/en/instruments.mp3", ar: "assets/audio/ar/instruments.mp3" },
+    "curriculum.html": { en: "assets/audio/en/curriculum.mp3",  ar: "assets/audio/ar/curriculum.mp3" },
+    "videos.html":     { en: "assets/audio/en/videos.mp3",      ar: "assets/audio/ar/videos.mp3" },
+    "quiz.html":       { en: "assets/audio/en/quiz.mp3",        ar: "assets/audio/ar/quiz.mp3" },
+    "notebook.html":   { en: "assets/audio/en/notebook.mp3" }
   };
 
   /* =====================================================================
@@ -250,7 +254,8 @@
       const slim = key.replace(/\.html$/, "");
       const c = CLIPS[key] || CLIPS[key + ".html"] || CLIPS[slim + ".html"];
       if (!c) return null;
-      return c[this.lang] || c.ar || null;
+      /* مقطع اللغة المختارة فقط: إن لم يوجد نعود إلى صوت المتصفح بنفس اللغة */
+      return c[this.lang] || null;
     },
     isRecorded(key) { return !!this.clipFor(key); },
 
