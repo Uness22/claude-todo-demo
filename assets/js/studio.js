@@ -243,6 +243,17 @@
     "gram.s6": { ar: "assets/audio/ar/gram.s6.mp3" },
     "gram.s7": { ar: "assets/audio/ar/gram.s7.mp3" },
     "gram.res1": { ar: "assets/audio/ar/gram.res1.mp3" },
+    /* إنجليزي + عربي — أحكام النتيجة وخطوات العمل العقيم (دفعة 5) */
+    "gram.res1": { en: "assets/audio/en/gram.res1.mp3", ar: "assets/audio/ar/gram.res1.mp3" },
+    "gram.res2": { en: "assets/audio/en/gram.res2.mp3", ar: "assets/audio/ar/gram.res2.mp3" },
+    "gram.res3": { en: "assets/audio/en/gram.res3.mp3", ar: "assets/audio/ar/gram.res3.mp3" },
+    "bench.a0": { en: "assets/audio/en/bench.a0.mp3", ar: "assets/audio/ar/bench.a0.mp3" },
+    "bench.a1": { en: "assets/audio/en/bench.a1.mp3", ar: "assets/audio/ar/bench.a1.mp3" },
+    "bench.a2": { en: "assets/audio/en/bench.a2.mp3", ar: "assets/audio/ar/bench.a2.mp3" },
+    "bench.a3": { en: "assets/audio/en/bench.a3.mp3", ar: "assets/audio/ar/bench.a3.mp3" },
+    "bench.a4": { en: "assets/audio/en/bench.a4.mp3", ar: "assets/audio/ar/bench.a4.mp3" },
+    "bench.a5": { en: "assets/audio/en/bench.a5.mp3", ar: "assets/audio/ar/bench.a5.mp3" },
+    "bench.a6": { en: "assets/audio/en/bench.a6.mp3", ar: "assets/audio/ar/bench.a6.mp3" },
     /* إنجليزي + عربي — خطوات صبغة جرام (دفعة 4) */
     "gram.s0": { en: "assets/audio/en/gram.s0.mp3", ar: "assets/audio/ar/gram.s0.mp3" },
     "gram.s1": { en: "assets/audio/en/gram.s1.mp3", ar: "assets/audio/ar/gram.s1.mp3" },
