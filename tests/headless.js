@@ -137,9 +137,12 @@ const scenarios = {
     click("#exportBench");
     if (window.VL && window.VL.voice) { window.VL.voice.sayPage(); window.VL.say("micro.oil"); window.VL.voice.step("gram", "s4"); }
   },
-  "bench.html": async ({ $, $$, click, pointer, setVal, wait }) => {
+  "bench.html": async ({ window, $, $$, click, pointer, setVal, wait, errs }) => {
     const order = ["flame1", "cool", "open", "take", "plate", "flame2", "close"];
     order.forEach(id => { const b = $$("#asepticMount [data-a]").find(x => x.getAttribute("data-a") === id); click(b || $("#asepticMount [data-a]")); });
+    /* مقطع الخطوة الحرجة المسجّل يجب أن يكون هو المشغَّل (bench.a0 فما بعد) */
+    const auRef = window.document.querySelector("audio");
+    if (!auRef || !/bench\.a\d+\.mp3$/.test(auRef.src || "")) errs.push("لم يُشغَّل مقطع خطوة عقيمة مسجّل (src=" + (auRef && auRef.src) + ")");
     click("#asepticMount [data-a]");
     const cv = $("#plate");
     for (let q = 0; q < 4; q++) {

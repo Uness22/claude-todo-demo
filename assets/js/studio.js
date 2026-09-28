@@ -219,6 +219,17 @@
     "dilution.html":   { ar: "assets/audio/ar/dilution.mp3",        en: "assets/audio/en/dilution.mp3" },
     "bench.html":      { ar: "assets/audio/ar/bench.mp3",           en: "assets/audio/en/bench.mp3" },
     "microscope.html": { ar: "assets/audio/ar/microscope.mp3",      en: "assets/audio/en/microscope.mp3" },
+    /* عربي — أحكام الخطأ في الصبغة + خطوات الزرع والعقم (دفعة 3) */
+    "gram.res2": { ar: "assets/audio/ar/gram.res2.mp3" },
+    "gram.res3": { ar: "assets/audio/ar/gram.res3.mp3" },
+    "bench.a0": { ar: "assets/audio/ar/bench.a0.mp3" },
+    "bench.a1": { ar: "assets/audio/ar/bench.a1.mp3" },
+    "bench.a2": { ar: "assets/audio/ar/bench.a2.mp3" },
+    "bench.a3": { ar: "assets/audio/ar/bench.a3.mp3" },
+    "bench.a4": { ar: "assets/audio/ar/bench.a4.mp3" },
+    "bench.a5": { ar: "assets/audio/ar/bench.a5.mp3" },
+    "bench.a6": { ar: "assets/audio/ar/bench.a6.mp3" },
+    "bench.flame": { ar: "assets/audio/ar/bench.flame.mp3" },
     /* عربي — الخطوات الحرجة لصبغة جرام (تُشغَّل لحظة تنفيذ الخطوة) */
     "gram.s0": { ar: "assets/audio/ar/gram.s0.mp3" },
     "gram.s1": { ar: "assets/audio/ar/gram.s1.mp3" },
