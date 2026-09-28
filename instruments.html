@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الأجهزة المخبرية — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ٠٩ — الأجهزة والقياس</span>
+    <h1>⚙️ الأجهزة المخبرية — شغّلها بنفسك وتعلّم متى تنجح ومتى تفشل</h1>
+    <p class="muted" style="max-width:960px">
+      الأجهزة هي ما يحوّل المهارة اليدوية إلى نتيجة موثوقة. هنا تشغّل <b>الأوتوكلاف</b> بمؤشراته واختبار البوغ، وتضبط <b>الحاضنة</b> بالحرارة والجو المناسبين، وتبرمج <b>جهاز PCR</b> وتقرأ الجلّ،
+      وتقيس <b>pH</b> و<b>النشاط المائي</b>، وتحسب <b>قوة الطرد المركزي</b>، وتقرأ <b>الكثافة الضوئية</b>، وتدير <b>سلسلة التبريد</b>.
+    </p>
+  </div>
+
+  <div class="section-head"><h2>① الأوتوكلاف — التعقيم بالبخار</h2><span class="bar"></span></div>
+  <p class="muted small" style="max-width:900px">جودة التعقيم لا تُقاس «بالشعور» بل بالتحقق: درجة الحرارة، الضغط، الزمن، مؤشر كيميائي، ومؤشر بيولوجي (شريط بوغ). جرّب دورة خاطئة عن قصد لترى ماذا يحدث للمؤشرات.</p>
+  <div id="autoMount"></div>
+
+  <div class="section-head"><h2>② الحاضنة — الحرارة والجو والزمن</h2><span class="bar"></span></div>
+  <p class="muted small" style="max-width:900px">لكل كائن متطلبات: العطيفة تريد 42°م وجوًا دقيق الأكسجين، والأعفان تريد 25°م لعدة أيام، والمطثيات لاهوائي. اختر إعدادات خاطئة ولاحظ نتيجة النمو.</p>
+  <div id="incMount"></div>
+
+  <div class="section-head"><h2>③ جهاز PCR — من الخليط إلى الجلّ</h2><span class="bar"></span></div>
+  <p class="muted small" style="max-width:900px">احسب كميات خليط التفاعل لكل عدد من العينات (مع احتياطي 10%، فالتقنية تفقد حجمًا)، ثم برمج الدورات الحرارية، واقرأ الجلّ مع الضوابط الموجبة والسلبية.</p>
+  <div id="pcrMount"></div>
+
+  <div class="section-head"><h2>④ أجهزة القياس: pH والنشاط المائي والطرد المركزي والامتصاصية</h2><span class="bar"></span></div>
+  <div class="grid g2">
+    <div id="phMount"></div>
+    <div id="awMount"></div>
+  </div>
+  <div class="grid g2 mt">
+    <div id="cfMount"></div>
+    <div id="spMount"></div>
+  </div>
+
+  <div class="section-head"><h2>⑤ سلسلة التبريد — أمراض صغيرة تُدار بحرارة صحيحة</h2><span class="bar"></span></div>
+  <div id="coldMount"></div>
+
+  <div class="section-head"><h2>📖 جدول مرجعي: ظروف كل مجموعة ميكروبية</h2><span class="bar"></span></div>
+  <div class="card"><div class="tblwrap"><table>
+    <thead><tr><th>المجموعة</th><th>الحرارة المثالية</th><th>الجو</th><th>الوسط المفضل</th><th>ملاحظة</th></tr></thead>
+    <tbody>
+      <tr><td>بكتيريا ممرضة معوية</td><td>35–37°م</td><td>هوائي (سالمونيلا/شيغيلا)، دقيق الأكسجين (عطيفة)</td><td>MacConkey / XLD / SS</td><td>الإثراء أولًا في أغلب العينات الغذائية</td></tr>
+      <tr><td>ليستيريا</td><td>30–37°م</td><td>هوائي</td><td>ALOA / PALCAM (مع إثراء Fraser)</td><td>تُنَمّى 24–48 ساعة، وتتحمل التبريد</td></tr>
+      <tr><td>مطثيات</td><td>37°م</td><td>لاهوائي</td><td>TSC / TSN (لـ C. perfringens)</td><td>حرارة صادمة للسبور أحيانًا</td></tr>
+      <tr><td>خمائر وأعفان</td><td>25°م</td><td>هوائي</td><td>YGC / PDA / Sabouraud</td><td>3–7 أيام للنمو الكافي</td></tr>
+      <tr><td>بكتيريا لاكتيكية</td><td>30–37°م</td><td>دقيق الأكسجين</td><td>MRS</td><td>48–72 ساعة</td></tr>
+      <tr><td>أنماط ضمّية</td><td>35–37°م</td><td>هوائي</td><td>TCBS (قلوي pH ~8.6)</td><td>تتحمل الملح وتحب القلويات</td></tr>
+    </tbody>
+  </table></div></div>
+
+  <div class="section-head"><h2>🎬 فيديوهات الأجهزة والتعقيم</h2><span class="bar"></span></div>
+  <div class="grid g3" id="vidBox"></div>
+
+  <div class="section-head"><h2>📝 اختبار الأجهزة</h2><span class="bar"></span></div>
+  <div id="quizBox"></div>
+<div class="row mt" data-record="🎥 سجّل تشغيل الأجهزة (شاشة وصوت)"></div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/studio.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="assets/js/labs-instruments.js"></script>
+<script>
+VL.boot();
+LABS.autoclave(document.getElementById('autoMount'));
+LABS.incubator(document.getElementById('incMount'));
+LABS.pcr(document.getElementById('pcrMount'));
+LABS.phMeter(document.getElementById('phMount'));
+LABS.awMeter(document.getElementById('awMount'));
+LABS.centrifuge(document.getElementById('cfMount'));
+LABS.spectro(document.getElementById('spMount'));
+LABS.coldChain(document.getElementById('coldMount'));
+PAGES.videoCards(document.getElementById('vidBox'), { tags: ['أجهزة', 'تعقيم', 'PCR'], n: 3 });
+PAGES.quizWidget(document.getElementById('quizBox'), 'instruments', 8);
+</script>
+</body>
+</html>

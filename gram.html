@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>صبغة جرام التفاعلية — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ٠٤ — التشخيص الميكروبي</span>
+    <h1>🎨 صبغة جرام — نفّذها بنفسك، فترتيب الكواشف يحدّد إن كانت النتيجة صحيحة أم مضلّلة</h1>
+    <p class="muted" style="max-width:940px">
+      صبغة جرام هي أهم صبغة تفريقية في مختبر الميكروبيولوجيا: تفصل البكتيريا إلى موجبة (بنفسجية) وسالبة (وردية) بحسب بنية الجدار.
+      في هذه المحاكاة ستختار الكواشف بالترتيب، وتتحكم في الخطوة الحرجة (زمن مزيل اللون)، ثم <b>تفحص نتيجتك الحقيقية</b> في المجهر الافتراضي —
+      وترى بنفسك ما يفعل الخطأ بالنتيجة.
+    </p>
+    <div class="row mt"><span class="pill">🧪 ٦ كواشف</span><span class="pill">⏱ مزيل لون بتوقيت</span><span class="pill">🔬 نتيجة على شريحة حقيقية</span></div>
+  </div>
+
+  <div class="section-head"><h2>① منصة الصبغة التفاعلية</h2><span class="bar"></span></div>
+  <div id="gramMount"></div>
+
+  <div class="section-head"><h2>② الشريحة الناتجة — افحصها بنفسك</h2><span class="bar"></span></div>
+  <div id="viewerMount"></div>
+
+  <div class="section-head"><h2>③ المرجع السريع: الخطوات والوظائف والتفسير</h2><span class="bar"></span></div>
+  <div id="refMount"></div>
+
+  <div class="section-head"><h2>⚠️ خمسة أخطاء تُفسد صبغة جرام</h2><span class="bar"></span></div>
+  <div class="grid g3">
+    <div class="card"><h3>1. مسحة سميكة</h3><p class="small muted">الكواشف لا تتخلل الطبقة، فيبقى اللون البنفسجي محتجزًا وتظهر السالبة موجبة — والنتيجة تضليل كامل.</p></div>
+    <div class="card"><h3>2. إفراط في إزالة اللون</h3><p class="small muted">أكثر من 4–5 ثوانٍ للعصويات تُفرّغ المعقد من الموجبة أيضًا: كل شيء وردي، والخطأ الشائع هنا يجعل بكتيريا موجبة تُقرأ سالبة.</p></div>
+    <div class="card"><h3>3. تقصير في إزالة اللون</h3><p class="small muted">أقل من ثانية: تبقى السالبة بنفسجية، فيبدو الحقل كله موجبًا، وأنت تشطّب نصف الحقيقة.</p></div>
+    <div class="card"><h3>4. نسيان اليود</h3><p class="small muted">بدون المثبّت يخرج الكريستال البنفسجي بالشطف، فتفقد الموجبة لونها وتُقرأ سالبة خطأً.</p></div>
+    <div class="card"><h3>5. تقديم السافرانين</h3><p class="small muted">إذا استُخدم قبل مزيل اللون فسيملأ الخلايا بلون أحمر لن يخرج بالنزع؛ لن يمكنك التمييز بعدها.</p></div>
+    <div class="card"><h3>6. مسحة بلا تثبيت حراري</h3><p class="small muted">الخلايا تُغسل من الشريحة بالكامل، فتقف أمام حقل فارغ تشكّ في جهازك — والمشكلة في خطوتك الأولى.</p></div>
+  </div>
+
+  <div class="section-head"><h2>🎬 فيديوهات صبغة جرام</h2><span class="bar"></span></div>
+  <div class="grid g3" id="vidBox"></div>
+
+  <div class="section-head"><h2>📝 اختبار صبغة جرام</h2><span class="bar"></span></div>
+  <div id="quizBox"></div>
+<div class="row mt" data-record="🎥 سجّل جلستك (شاشة وصوت)"></div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/studio.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="assets/js/labs-gram.js"></script>
+<script>
+VL.boot();
+LABS.gram(document.getElementById('gramMount'), document.getElementById('viewerMount'));
+LABS.gramReference(document.getElementById('refMount'));
+PAGES.videoCards(document.getElementById('vidBox'), { tags: ['جرام', 'صبغة', 'عربي'], n: 3 });
+PAGES.quizWidget(document.getElementById('quizBox'), 'gram', 7);
+</script>
+</body>
+</html>

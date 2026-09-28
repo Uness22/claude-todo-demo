@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الأوساط الزرعية وقراءة الأطباق — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ٠٧ — الأوساط والقراءة</span>
+    <h1>🧾 الأوساط الزرعية وقراءة الأطباق — من المسحوق إلى الحكم المخبري</h1>
+    <p class="muted" style="max-width:940px">
+      الوسط الزرعي هو أرض المعركة: تختار له مكوّنات تجعله <b>انتقائيًا</b> (يسمح لنوع ويمنع آخر)، و<b>تفريقيًا</b> (يميّز بين أنواع بلون أو تفاعل).
+      هنا تحسب الكميات وتحضّر الوسط وتعقّمه، ثم تتعلّم قراءة أشهر الأوساط وتفسير ما تراه على الطبق.
+    </p>
+    <div class="row mt"><span class="pill">🧮 حاسبة التحضير</span><span class="pill">🔥 دورة الأوتوكلاف</span><span class="pill">🎨 قراءة MacConkey / XLD / MSA / TCBS / ALOA</span></div>
+  </div>
+
+  <div class="section-head"><h2>① حاسبة تحضير الأوساط والتعقيم</h2><span class="bar"></span></div>
+  <div id="prepMount"></div>
+
+  <div class="section-head"><h2>② قراءة الأطباق والتفريق بين المستعمرات</h2><span class="bar"></span></div>
+  <div id="readMount"></div>
+
+  <div class="section-head"><h2>③ تحدي قراءة الأطباق</h2><span class="bar"></span></div>
+  <div id="challengeMount"></div>
+
+  <div class="section-head"><h2>④ وصف المستعمرة — مفردات لا غنى عنها</h2><span class="bar"></span></div>
+  <div id="morphMount"></div>
+
+  <div class="section-head"><h2>⑤ أرشيف الأوساط المخبرية</h2><span class="bar"></span></div>
+  <div class="card">
+    <input type="search" id="mediaSearch" placeholder="ابحث باسم الوسط أو استخدامه (مثال: سالمونيلا، خمائر، تفريقي)…">
+    <div id="archiveMount" class="mt"></div>
+  </div>
+
+  <div class="section-head"><h2>📖 انتقائي أم تفريقي؟ الفرق في سطرين</h2><span class="bar"></span></div>
+  <div class="grid g3">
+    <div class="card"><h3>🚧 انتقائي (Selective)</h3><p class="small muted">يحتوي مثبطات (أملاح صفراء، بلور بنفسجي، ملح عالي، مضادات حيوية، pH منخفض) تمنع نمو مجموعة وتسمح بأخرى. مثال: MacConkey يمنع موجبة الجرام.</p></div>
+    <div class="card"><h3>🎨 تفريقي (Differential)</h3><p class="small muted">يحتوي مؤشرًا أو مادة تُظهر تفاعلًا مميزًا (تخمير لاكتوز، إنتاج H₂S، تحلل الدهون). مثال: XLD يفرّق بإظهار المركز الأسود.</p></div>
+    <div class="card"><h3>➕ إثراء (Enrichment)</h3><p class="small muted">وسط سائل يزيد عدد الميكروب المستهدف ويثبّط غيره قبل العزل — أو وسيط إحياء يعيد للخلايا المتضرّرة قدرتها على النمو (BPW).</p></div>
+  </div>
+
+  <div class="section-head"><h2>🎬 فيديوهات ذات صلة</h2><span class="bar"></span></div>
+  <div class="grid g3" id="vidBox"></div>
+
+  <div class="section-head"><h2>📝 اختبار الأوساط</h2><span class="bar"></span></div>
+  <div id="quizBox"></div>
+<div class="row mt" data-record="🎥 سجّل جلستك (شاشة وصوت)"></div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/studio.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="assets/js/labs-media.js"></script>
+<script>
+VL.boot();
+LABS.mediaPrep(document.getElementById('prepMount'));
+LABS.plateReading(document.getElementById('readMount'), document.getElementById('challengeMount'));
+LABS.colonyMorph(document.getElementById('morphMount'));
+PAGES.mediaArchive(document.getElementById('archiveMount'), document.getElementById('mediaSearch'));
+PAGES.videoCards(document.getElementById('vidBox'), { tags: ['زرع', 'تعقيم', 'أجهزة'], n: 3 });
+PAGES.quizWidget(document.getElementById('quizBox'), 'media', 8);
+</script>
+</body>
+</html>

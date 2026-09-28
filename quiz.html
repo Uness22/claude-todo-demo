@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الاختبارات والتقييم — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ١٢ — التقييم الذاتي</span>
+    <h1>📝 الاختبارات — ٧٨ سؤالًا بعشرة موضوعات مع شرح لكل إجابة</h1>
+    <p class="muted" style="max-width:900px">كل سؤال يشرح لك سبب الإجابة الصحيحة، فالتقييم هنا أداة تعلّم لا أداة رعب. تُحفظ أفضل نتيجة لكل موضوع في متصفحك، وتمنحك نقاط خبرة وشارات التفوق.</p>
+    <div class="row mt"><span class="pill">🎯 ١١ موضوعًا</span><span class="pill">🧠 شرح فوري</span><span class="pill">🏅 شارات تفوق</span></div>
+  </div>
+
+  <div class="card mb"><div id="chipsBox"></div></div>
+  <div id="quizMount"></div>
+
+  <div class="section-head"><h2>🎓 خطة مراجعة قبل المشروع النهائي</h2><span class="bar"></span></div>
+  <div class="grid g3">
+    <div class="card"><h3>١. راجع المفاهيم</h3><p class="small muted">ابدأ باختبار «أساسيات» و«سلامة الغذاء»، ثم انتقل إلى «المجهر» و«صبغة جرام» — هذه تشكّل ٥٠% من أسئلة المعمل العملية.</p></div>
+    <div class="card"><h3>٢. أتقن الحسابات</h3><p class="small muted">اختبار «التخفيف» يعتمد على قانون CFU؛ أعد التمرين حتى تصل ١٠٠% ثلاث مرات متتالية.</p></div>
+    <div class="card"><h3>٣. تحقق من الشارات</h3><p class="small muted">شارة «تفوّق» تتطلب ٨٠% أو أكثر في الموضوع. راجع المواضيع التي لم تحصل فيها على شارة.</p></div>
+  </div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/studio.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+VL.boot();
+PAGES.quizPage(document.getElementById('quizMount'), document.getElementById('chipsBox'));
+</script>
+</body>
+</html>

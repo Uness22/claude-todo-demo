@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>المعمل الافتراضي لميكروبيولوجيا الغذاء — محاكاة كاملة للجلسات العملية</title>
+<meta name="description" content="تطبيق تعليمي شامل يحاكي معمل ميكروبيولوجيا الغذاء: السلامة، الزرع المعقّم، صبغة جرام، المجهر بمقاسات الميكرومتر، التخفيف والعدّ، الأوساط الاختيارية، الفيروسات ومسببات الأمراض، والأجهزة مع فيديوهات عملية.">
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+
+  <div class="hero">
+    <span class="tag">معمل افتراضي متكامل · Food Microbiology Virtual Lab</span>
+    <h1>إذا لم تستطع حضور المعمل الحقيقي… فادخل المعمل الافتراضي كأنك واقف فيه</h1>
+    <p class="muted" style="max-width:960px">
+      هذا التطبيق يبني لك <b>معملًا كاملاً</b> لدارس علوم الأغذية: محطة سلامة ومطافئ ومغسلة عين، منصة زرع معقّمة
+      بالمِشعل والعروة، تحضير أوساط وتعقيم بالأوتوكلاف، حاضنة بدرجات حرارة دقيقة، صبغة جرام بخطواتها الزمنية،
+      تخفيف متسلسل وعدّ المستعمرات وحساب CFU/غ، ومجهر ضوئي وهمي بعدسات 4× حتى 100× بالزيت مع قياس بالميكرومتر،
+      ومكتبة ميكروبات كاملة (بكتيريا، خمائر، أعفان، طفيليات، فيروسات)، وأجهزة حديثة: PCR، ELISA، مايكروويف،
+      جهاز الطرد المركزي، وقياس pH ونشاط الماء. كل وحدة فيها: شرح عملي، محاكاة تفاعلية، فيديوهات عملية،
+      واختبار يُسجَّل في دفتر معملك.
+    </p>
+    <div class="row mt">
+      <a class="btn primary" href="microscope.html">🔬 ابدأ من المجهر الافتراضي</a>
+      <a class="btn" href="curriculum.html">📚 الجلسات العملية الأربع عشرة</a>
+      <a class="btn ghost" href="videos.html">🎬 الفيديوهات العملية</a>
+      <button class="btn ghost" id="login">👤 تسجيل بيانات الطالب</button>
+    </div>
+    <div class="grid g4 mt">
+      <div class="card kpi"><b>٣٦</b><span>شريحة مجهرية مجهّزة</span></div>
+      <div class="card kpi"><b>١٤</b><span>جلسة عملية كاملة</span></div>
+      <div class="card kpi"><b>١٢</b><span>محاكاة تفاعلية للأجهزة والتقنيات</span></div>
+      <div class="card kpi"><b><span data-xp>0</span></b><span>نقطة خبرة في معملك</span></div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>🏛 خريطة المعمل — اضغط على أي محطة لتدخلها</h2><span class="bar"></span></div>
+  <div class="map" id="labMap"></div>
+  <div class="stlist mt" id="labMapList"></div>
+
+  <div class="section-head"><h2>📈 تقدّمك في وحدات المعمل</h2><span class="bar"></span></div>
+  <div class="card">
+    <div class="grid g2">
+      <div id="progressBox"></div>
+      <div>
+        <h3>🗂 دفتر المعمل</h3>
+        <p class="small muted">كل نتيجة تحصل عليها (صورة حقل مجهري، صبغة جرام، تسلسل تخفيف، حسابات CFU، قراءة أوساط، تشغيل أوتوكلاف) تُحفظ في دفترك مع الوقت والقياسات، ويمكن طباعتها كتقرير أو تصديرها ملف نصي لتسليمها لأستاذك.</p>
+        <div class="row"><a class="btn primary" href="notebook.html">افتح دفتر المعمل</a><a class="btn ghost" href="quiz.html">اختبر نفسك</a></div>
+        <div class="panel2 mt"><b>شاراتك:</b> <span data-badges>0</span> · <b>مستواك:</b> <span data-level>1</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>🧭 مسار العمل المخبري في يوم واحد</h2><span class="bar"></span></div>
+  <div class="grid g3">
+    <div class="card"><h3><span class="ic">①</span> قبل المعمل (Pre-lab)</h3>
+      <ul class="list-check small">
+        <li>اقرأ مبدأ الجلسة وأهدافها في <a href="curriculum.html">دليل الجلسات</a>.</li>
+        <li>احسب الكميات: حجم الوسط، عدد الأنابيب، معاملات التخفيف.</li>
+        <li>جهّز جدول النتائج المتوقّع (وليس النتيجة نفسها).</li>
+        <li>راجع <a href="safety.html">قواعد السلامة</a> ومخاطر الكواشف.</li>
+      </ul></div>
+    <div class="card"><h3><span class="ic">②</span> أثناء المعمل (Bench work)</h3>
+      <ul class="list-check small">
+        <li>عقّم السطح واليدين، وأشعل المِشعل في نطاق العمل المعقّم.</li>
+        <li>اكتب كل خطوة بالوقت، ودرجة الحرارة، وأرقام العيّنات.</li>
+        <li>افحص بالمجهز قبل أن تتخلص من أي أنبوب.</li>
+        <li>سجّل الشواذ والملاحظات غير المتوقعة — هي أهم ما في الدفتر.</li>
+      </ul></div>
+    <div class="card"><h3><span class="ic">③</span> بعد المعمل (Post-lab)</h3>
+      <ul class="list-check small">
+        <li>احضن العيّنات ثم اقرأ النتائج بعد 24–48 ساعة.</li>
+        <li>احسب النتيجة النهائية بوحدات معيارية (CFU/g، CFU/ml، MPN/g).</li>
+        <li>قارن بالحدود القانونية واكتب الاستنتاج والتوصيات.</li>
+        <li>تعقيم النفايات قبل الرمي، ونظّف المنصة.</li>
+      </ul></div>
+  </div>
+
+  <div class="section-head"><h2>⚡ وحدات سريعة</h2><span class="bar"></span></div>
+  <div class="grid gauto" id="quickCards"></div>
+
+  <div class="section-head"><h2>🎬 مقتطفات من الفيديوهات العملية</h2><span class="bar"></span></div>
+  <div class="grid g3" id="homeVideos"></div>
+  <div class="row mt"><a class="btn primary" href="videos.html">مكتبة الفيديو كاملة ←</a></div>
+
+  <div class="section-head"><h2>📝 اختبر معلوماتك في ٥ دقائق</h2><span class="bar"></span></div>
+  <div id="homeQuiz"></div>
+
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/studio.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+VL.boot();
+PAGES.labMap(document.getElementById('labMap'), document.getElementById('labMapList'));
+PAGES.progress(document.getElementById('progressBox'));
+PAGES.quickCards(document.getElementById('quickCards'));
+PAGES.videoCards(document.getElementById('homeVideos'), { featured: true, n: 3 });
+PAGES.quizWidget(document.getElementById('homeQuiz'), 'general', 5);
+document.getElementById('login').onclick = () => VL.UI.requireStudent(() => VL.UI.toast('بياناتك محفوظة في المعمل ✔','g'));
+</script>
+</body>
+</html>
