@@ -243,6 +243,10 @@
     "gram.s6": { ar: "assets/audio/ar/gram.s6.mp3" },
     "gram.s7": { ar: "assets/audio/ar/gram.s7.mp3" },
     "gram.res1": { ar: "assets/audio/ar/gram.res1.mp3" },
+    /* إنجليزي + عربي — إكمال خطوات الزرع والعقم (دفعة 5ب) */
+    "bench.flame": { en: "assets/audio/en/bench.flame.mp3", ar: "assets/audio/ar/bench.flame.mp3" },
+    "bench.quad": { en: "assets/audio/en/bench.quad.mp3", ar: "assets/audio/ar/bench.quad.mp3" },
+    "bench.incub": { en: "assets/audio/en/bench.incub.mp3", ar: "assets/audio/ar/bench.incub.mp3" },
     /* إنجليزي + عربي — أحكام النتيجة وخطوات العمل العقيم (دفعة 5) */
     "gram.res1": { en: "assets/audio/en/gram.res1.mp3", ar: "assets/audio/ar/gram.res1.mp3" },
     "gram.res2": { en: "assets/audio/en/gram.res2.mp3", ar: "assets/audio/ar/gram.res2.mp3" },
