@@ -218,7 +218,12 @@
     "gram.html":       { ar: "assets/audio/ar/gram.mp3",            en: "assets/audio/en/gram.mp3" },
     "dilution.html":   { ar: "assets/audio/ar/dilution.mp3",        en: "assets/audio/en/dilution.mp3" },
     "bench.html":      { ar: "assets/audio/ar/bench.mp3",           en: "assets/audio/en/bench.mp3" },
-    "microscope.html": { ar: "assets/audio/ar/microscope.mp3",      en: "assets/audio/en/microscope.mp3" }
+    "microscope.html": { ar: "assets/audio/ar/microscope.mp3",      en: "assets/audio/en/microscope.mp3" },
+    "safety.html":     { en: "assets/audio/en/safety.mp3" },
+    "media.html":      { en: "assets/audio/en/media.mp3" },
+    "pathogens.html":  { en: "assets/audio/en/pathogens.mp3" },
+    "instruments.html":{ en: "assets/audio/en/instruments.mp3" },
+    "curriculum.html": { en: "assets/audio/en/curriculum.mp3" }
   };
 
   /* =====================================================================
@@ -598,10 +603,9 @@
       const recAr = Object.keys(CLIPS).filter(k => CLIPS[k].ar).length;
       const recEn = Object.keys(CLIPS).filter(k => CLIPS[k].en).length;
       n.innerHTML = "🎙 مقاطع مسجّلة بصوت راوٍ مختار: <b>" + recAr + " عربي</b> · <b>" + recEn + " إنجليزي</b> " +
-        "(الجولة، جرام، الزرع، التخفيف، المجهر). " +
-        "أصوات المتصفح الاحتياطية: " + ar + " عربي · " + en + " إنجليزي. " +
-        (voice.lang === "en" ? "الوحدات بلا مقطع إنجليزي تُقرأ بصوت المتصفح الإنجليزي. " : "") +
-        (ar === 0 && voice.lang === "ar" ? "لا صوت عربي مثبّت في نظامك — المقاطع المسجّلة تغطي الوحدات الخمس الرئيسية، ويمكنك تثبيت حزمة الصوت العربي من إعدادات النظام. " : "");
+        "(مقدّمات الوحدات وشرح خطواتها الحرجة). " +
+        "أصوات المتصفح الاحتياطية المتاحة في نظامك: " + ar + " عربي · " + en + " إنجليزي. " +
+        (ar === 0 && voice.lang === "ar" ? "لا صوت عربي مثبّت — الشروح المسجّلة تغطي الوحدات الرئيسية، ويمكنك تثبيت حزمة الصوت العربي من إعدادات النظام. " : "");
     },
     badge(on) { const f = $("#stFab"); if (f) f.classList.toggle("speaking", !!on); },
     tab() {},
