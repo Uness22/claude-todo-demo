@@ -54,7 +54,7 @@
         '<button class="btn sm primary" id="gFinish" disabled>🔬 افحص النتيجة بالمجهر</button></div>' +
         '<div class="note w mt small"><b>تنبيه</b>لا يُسمح بإعادة تشغيل الخطوات بعد التحضين؛ الفحص يكون بعد الانتهاء.</div></div></div>';
       drawLog(); drawTray(); drawErrors();
-      if (st.step === 4) holdUI();
+      if (st.step === 4) { holdUI(); if (W.VL.say) W.VL.say("gram.s4"); }
     }
     function drawTray() {
       const tray = box.querySelector("#gTray");
@@ -100,9 +100,11 @@
       if (id === want || (want === "wash" && id === "wash")) {
         st.step++;
         VL.UI.toast("✔ " + STEPS[st.step - 1].t.split("—")[0].trim(), "g");
+        if (W.VL.say) W.VL.say("gram.s" + Math.min(STEPS.length - 1, st.step));
       } else {
         st.errors.push("استُخدم " + (REAGENTS.find(r => r.id === id) || { t: id }).t + " في خطوة " + (st.step + 1) + " بدل الخطوة الصحيحة");
         VL.UI.toast("✘ كاشف غير مناسب في هذه الخطوة — سيؤثر على النتيجة النهائية", "r");
+        if (W.VL.say) W.VL.say("gram.wrong");
       }
       render();
       if (st.step >= STEPS.length) {
@@ -115,6 +117,7 @@
       else if (s > 4) v = "إفراط في إزالة اللون: الموجبة تفقد اللون البنفسجي وقد تظهر وردية.";
       else if (s < 1) v = "تقصير في إزالة اللون (Under-decolourised): السالبة ستبقى بنفسجية وتُقرأ خطأً موجبة.";
       else v = "زمن مناسب ✔ 1–3 ثوانٍ: النتيجة التفريقية صحيحة.";
+      if (W.VL.say) W.VL.say(s > 4 || s < 1 ? "gram.wrong" : "gram.s5");
       box.querySelector("#gTime").textContent = s.toFixed(1) + " ثانية";
       box.querySelector("#gVerdict").innerHTML = v;
     }
@@ -172,6 +175,7 @@
     function showResult() {
       if (st.step < STEPS.length - 1) { VL.UI.toast("أكمل خطوات الصبغة أولًا", "w"); return; }
       if (st.step === STEPS.length - 1) { st.step++; drawLog(); }   // count the "view" step as done
+      if (W.VL.say) W.VL.say({ correct: "gram.res1", "negative-looking": "gram.res2", "positive-looking": "gram.res3", "grampos-lost": "gram.res4", allpink: "gram.res2", empty: "gram.res5" }[outcome()] || "gram.res1");
       st.done = true;
       const kind = outcome();
       const id = buildSlide(kind);

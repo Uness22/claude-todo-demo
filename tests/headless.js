@@ -62,6 +62,22 @@ async function openPage(file, action) {
   if (!window.ImageData) window.ImageData = function (d, w, h) { return { data: d, width: w, height: h }; };
   if (!window.PointerEvent) window.PointerEvent = window.MouseEvent;
   if (!window.URL.createObjectURL) window.URL.createObjectURL = () => "blob:mock";
+  /* --- واجهات الصوت والتسجيل (وهمية) --- */
+  window.speechSynthesis = { getVoices: () => [{ lang: "ar-SA", name: "mock-ar" }, { lang: "en-US", name: "mock-en" }], speak(u) { if (u && u.onend) setTimeout(u.onend, 10); }, cancel() {}, onvoiceschanged: null };
+  window.SpeechSynthesisUtterance = function (t) { this.text = t; };
+  window.HTMLMediaElement.prototype.play = function () { this.dispatchEvent(new window.Event("play")); return Promise.resolve(); };
+  window.HTMLMediaElement.prototype.pause = function () {};
+  const track = { addEventListener() {}, stop() {}, kind: "video" };
+  window.HTMLCanvasElement.prototype.captureStream = () => ({ getVideoTracks: () => [track], getTracks: () => [track] });
+  const mkCtx = () => ({ state: "running", destination: {}, currentTime: 0, resume: () => Promise.resolve(), createGain: () => ({ gain: { value: 1 }, connect() {}, disconnect() {} }), createMediaStreamDestination: () => ({ stream: { getAudioTracks: () => [{ kind: "audio" }] } }), createMediaElementSource: () => ({ connect() {}, disconnect() {} }), createMediaStreamSource: () => ({ connect() {} }) });
+  window.AudioContext = mkCtx;
+  window.MediaStream = function () {};
+  window.MediaRecorder = function () { const self = this; this.state = "inactive"; this.mimeType = "video/webm";
+    this.start = () => { self.state = "recording"; if (self.ondataavailable) self.ondataavailable({ data: new window.Blob(["x"], { type: "video/webm" }) }); };
+    this.pause = () => { self.state = "paused"; }; this.resume = () => { self.state = "recording"; };
+    this.stop = () => { self.state = "inactive"; if (self.onstop) self.onstop(); }; };
+  window.MediaRecorder.isTypeSupported = () => true;
+  Object.defineProperty(window.navigator, "mediaDevices", { value: { getDisplayMedia: () => Promise.resolve({ getVideoTracks: () => [track], getAudioTracks: () => [], getTracks: () => [track] }), getUserMedia: () => Promise.resolve({ getTracks: () => [{ stop() {} }] }) }, configurable: true });
   if (!window.URL.revokeObjectURL) window.URL.revokeObjectURL = () => {};
   window.confirm = () => true; window.print = () => {};
   window.open = () => ({ document: { write() {}, close() {} }, print() {}, focus() {} });
@@ -119,8 +135,9 @@ const scenarios = {
     $("#fieldbox").dispatchEvent(new window.MouseEvent("click", { bubbles: true, clientX: 200, clientY: 200 }));
     await wait(300);
     click("#exportBench");
+    if (window.VL && window.VL.voice) { window.VL.voice.sayPage(); window.VL.say("micro.oil"); window.VL.voice.step("gram", "s4"); }
   },
-  "bench.html": async ({ $, $$, click, pointer, wait }) => {
+  "bench.html": async ({ $, $$, click, pointer, setVal, wait }) => {
     const order = ["flame1", "cool", "open", "take", "plate", "flame2", "close"];
     order.forEach(id => { const b = $$("#asepticMount [data-a]").find(x => x.getAttribute("data-a") === id); click(b || $("#asepticMount [data-a]")); });
     click("#asepticMount [data-a]");
@@ -136,6 +153,18 @@ const scenarios = {
       }
     }
     click("#incubate"); await wait(2600); click("#saveStreak");
+    /* --- الاستوديو: تعليق + تسجيل شاشة وصوت --- */
+    click("#stFab");
+    click("#stPlay"); click("#stStop");
+    $$("[data-lang]").forEach(b => click(b));
+    click("#stPlay");
+    setVal("#stRate", "1.2");
+    setVal("#stSrc", "lab"); setVal("#stAud", "mn");
+    click("#stRec"); await wait(300);
+    click("#stPause"); await wait(150); click("#stPause");
+    click("#stFin"); await wait(200); click(".modal .x");
+    setVal("#stSrc", "screen"); click("#stRec"); await wait(200); click("#stFin"); await wait(200);
+    const rq = $$("[data-record]")[0]; if (rq) click(rq.querySelector(".btn"));
   },
   "dilution.html": async ({ $, $$, click, setVal, wait }) => {
     click("#mix");

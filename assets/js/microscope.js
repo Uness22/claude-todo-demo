@@ -905,6 +905,7 @@
       if (i >= 3 && mags[i].oil) { /* oil needed */ }
       renderObjectives(); updateSteps(); updateInfoPanel();
       toast("العدسة الشيئية: " + mags[i].lab, "c");
+      if (W.VL.say) W.VL.say("micro.objective");
     }
     /* ---- controls ---- */
     function syncUI() {
@@ -937,12 +938,12 @@
       } else if (pct < 100) W.VL.store.setModule("microscope", pct);
     }
     function checkLight() {
-      if (viewer.illum > .42 && viewer.illum < .82 && !steps.light) { steps.light = 1; W.VL.store.addXP(8, "ضبط الإضاءة"); }
+      if (viewer.illum > .42 && viewer.illum < .82 && !steps.light) { steps.light = 1; W.VL.store.addXP(8, "ضبط الإضاءة"); if (W.VL.say) W.VL.say("micro.illum"); }
       if (viewer.iris > .3 && viewer.iris < .78 && !steps.iris) { steps.iris = 1; W.VL.store.addXP(8, "ضبط المكثف (فتحة العدسة)"); }
       updateSteps();
     }
     function checkFocus() {
-      if (viewer.focusBlur() < .1 && !steps.focus) { steps.focus = 1; W.VL.store.addXP(12, "ضبط البؤرة"); }
+      if (viewer.focusBlur() < .1 && !steps.focus) { steps.focus = 1; W.VL.store.addXP(12, "ضبط البؤرة"); if (W.VL.say) W.VL.say("micro.focus"); }
       updateSteps();
     }
     function checkOrder() {
@@ -951,7 +952,7 @@
       for (const v of orderLog) { if (v === need[ok]) ok++; if (ok === need.length) break; }
       if (ok >= 3 && !steps.order) { steps.order = 1; W.VL.store.addXP(10, "الانتقال التدريجي بين العدسات"); updateSteps(); }
       const m = viewer.mag();
-      if (m.oil && viewer.oil && !steps.oil) { steps.oil = 1; W.VL.store.addXP(12, "استخدام زيت الغمر"); updateSteps(); }
+      if (m.oil && viewer.oil && !steps.oil) { steps.oil = 1; W.VL.store.addXP(12, "استخدام زيت الغمر"); if (W.VL.say) W.VL.say("micro.oil"); updateSteps(); }
     }
     function clickField(ev) {
       const rect = canvas.getBoundingClientRect();
@@ -959,7 +960,7 @@
       const o = viewer.hit(px, py);
       viewer.selected = o;
       updateInfoPanel(o);
-      if (o && !steps.measure) { steps.measure = 1; W.VL.store.addXP(10, "قياس خلية بالميكرومتر"); updateSteps(); }
+      if (o && !steps.measure) { steps.measure = 1; W.VL.store.addXP(10, "قياس خلية بالميكرومتر"); if (W.VL.say) W.VL.say("micro.measure"); updateSteps(); }
     }
     function updateInfoPanel(o) {
       o = o || viewer.selected;
@@ -998,7 +999,7 @@
         img: dataURL, data: { slide: v.slide.id, mag: v.mag().lab, um: v.slide.umPerUnit, measured: v.selected ? v.selected.size * v.slide.umPerUnit : null },
         mode: "gray"
       });
-      steps.notebook = 1; W.VL.store.addXP(15, "حفظ صورة حقل في الدفتر"); updateSteps();
+      steps.notebook = 1; W.VL.store.addXP(15, "حفظ صورة حقل في الدفتر"); if (W.VL.say) W.VL.say("micro.save"); updateSteps();
     }
     function toast(m, k) { W.VL.UI.toast(m, k); }
 
@@ -1052,6 +1053,7 @@
               document.getElementById("qres").innerHTML = '<div class="note ' + (ok ? "s" : "d") + '"><b>' + (ok ? "إجابة صحيحة ✔" : "إجابة غير صحيحة") + "</b>" +
                 "الشريحة: <b>" + s.name + "</b><br>" + (s.org ? "<b>الكائن: " + s.org + "</b><br>" : "") + s.note + "<br><br><b>ملاحظة علمية:</b> " + s.teach + "</div>";
               if (ok) W.VL.store.addXP(25, "إجابة صحيحة في تحدي المجهر"); else W.VL.store.addXP(5, "محاولة في تحدي المجهر");
+              if (W.VL.say) W.VL.say(ok ? "micro.save" : "micro.challenge");
             });
           } });
       toast("تم تحميل شريحة عشوائية — حدد الشكل في نافذة التحدي", "c");
@@ -1085,7 +1087,7 @@
       W.VL.download("تقرير-جلسة-المجهر.txt", lines.join("\n"));
     };
     const objToDraw = steps;
-    steps.slide = 1; updateSteps();
+    steps.slide = 1; if (W.VL.say) W.VL.say("micro.enter"); updateSteps();
     return viewer;
   }
   function TEMPLATE() {

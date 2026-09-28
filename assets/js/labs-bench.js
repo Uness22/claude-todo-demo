@@ -32,6 +32,7 @@
         const want = ASEPTIC[i];
         if (id === want.id) {
           VL.UI.toast("✔ " + want.ok, "g");
+          if (W.VL.say) W.VL.say("bench.a" + Math.min(ASEPTIC.length - 1, i));
           const li = document.createElement("li"); li.innerHTML = want.t;
           document.getElementById("asepSteps").appendChild(li);
           i++;
@@ -45,6 +46,7 @@
         } else {
           errors++;
           VL.UI.toast("✘ " + (ASEPTIC.find(x => x.id === id).bad || "ترتيب غير صحيح"), "r");
+          if (W.VL.say) W.VL.say("bench.quad");
           render();
         }
       });
@@ -142,6 +144,7 @@
       if (incubated || sector > 3) return;
       drawing = true; curPts = [grab(e)];
       if (!lastFlame) VL.UI.toast("⚠ لم تُعقَّم العروة قبل هذا الخط — ستقل المستعمرات المنفصلة", "w");
+      if (W.VL.say) W.VL.say(lastFlame ? "bench.quad" : "bench.flame");
       cv.setPointerCapture(e.pointerId);
     });
     cv.addEventListener("pointermove", e => {

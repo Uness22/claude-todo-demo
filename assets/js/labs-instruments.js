@@ -47,7 +47,8 @@
       box.querySelector("#acCaps").onchange = e => { st.caps = e.target.value; };
       box.querySelector("#acFill").onchange = e => { st.fill = e.target.value; };
       box.querySelector("#acRun").onclick = run;
-      box.querySelector("#acReset").onclick = () => { st.done = null; st.running = false; render(); };
+      box.querySelector("#acReset").onclick = () => {
+      if (W.VL.say) W.VL.say("inst.autoclave"); st.done = null; st.running = false; render(); };
     }
     function log(msg) { const s = box.querySelector("#acScreen"); s.textContent += msg + "\n"; s.scrollTop = s.scrollHeight; }
     function run() {
@@ -139,6 +140,7 @@
       drawInc(0);
     };
     function conditions() {
+      if (W.VL.say) W.VL.say("inst.incubator");
       const o = ORGS.find(x => x.k === st.org);
       const tempOk = st.temp >= o.temp[0] - 1 && st.temp <= o.temp[o.temp.length - 1] + 1;
       const atmOk = st.atm === o.atm;
@@ -235,6 +237,7 @@
       drawCurve();
     };
     function drawCurve(progress) {
+      if (W.VL.say) W.VL.say("inst.pcr");
       const cv = box.querySelector("#pcrCv"); if (!cv) return;
       const ctx = cv.getContext("2d"), w = 420, h = 200;
       ctx.clearRect(0, 0, w, h);
@@ -345,7 +348,7 @@
         "</tbody></table></div>" +
         '<div class="note s mt small"><b>قاعدة عملية</b>pH 4.6 هو الحد الفاصل لخطر المطثية الوشيقية في المعلبات؛ لذلك تُصنّف المعلبات إلى «حمضية» و«منخفضة الحموضة» (تحتاج تعقيمًا أقوى).</div></div></div>';
       box.querySelector("#phR").oninput = e => { delta = +e.target.value; render(); };
-      box.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { s = +b.getAttribute("data-s"); delta = 0; render(); });
+      box.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { s = +b.getAttribute("data-s"); delta = 0; if (W.VL.say) W.VL.say("inst.ph"); render(); });
       VL.store.setModule("instruments", Math.max(20, VL.store.getModule("instruments")));
     };
     render();
@@ -374,7 +377,7 @@
         '<div class="note s mt small"><b>الفرق المهم</b>a<sub>w</sub> ليس «نسبة الماء» بل <b>الماء المتاح</b>: العسل يحتوي ماءً كثيرًا لكن aw منخفض جدًا لأن السكر يرتبط بالماء. لهذا لا ينمو فيه إلا القليل جدًا من الخمائر المتوسمية.</div>' +
         '<div class="note w mt small"><b>تطبيق صناعي</b>خفض aw بالتمليح أو التجفيف أو إضافة السكر هو أحد أقدم وأقوى أساليب الحفظ — ويُقاس للتحكم في درجة الحفظ (Hurdle Technology).</div></div></div>';
       box.querySelector("#awR").oninput = e => { addSalt = +e.target.value; render(); };
-      box.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { i = +b.getAttribute("data-p"); addSalt = 0; render(); });
+      box.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { i = +b.getAttribute("data-p"); addSalt = 0; if (W.VL.say) W.VL.say("inst.aw"); render(); });
       VL.store.setModule("instruments", Math.max(20, VL.store.getModule("instruments")));
     };
     render();
@@ -399,15 +402,17 @@
       box.querySelector("#cfR").oninput = e => { st.r = +e.target.value; upd(); };
       box.querySelector("#cfRpm").oninput = e => { st.rpm = +e.target.value; upd(); };
       box.querySelector("#cfRun").onclick = () => {
+      if (W.VL.say) W.VL.say("inst.centrifuge");
         const rcf2 = 1.118e-5 * st.r * st.rpm * st.rpm;
         const ok = rcf2 > 3000;
         box.querySelector("#cfOut").innerHTML = '<div class="note ' + (ok ? "s" : "w") + '"><b>' + (ok ? "ترسيب مناسب للخلايا البكتيرية" : "قوة طرد منخفضة") + "</b>" +
           "الخلايا البكتيرية تحتاج عادة 3000–8000 × g لمدة 10 دقائق. محاكاة نتيجة: " + (ok ? "روبة مرئية في قاع الأنبوب ✔" : "العينات لم تترسب بشكل واضح ✘") +
           '<div class="mt small">RCF = 1.118×10⁻⁵ × r(cm) × (RPM)² = ' + rcf2.toFixed(0) + " × g</div></div>" +
           '<button class="btn sm primary mt" id="cfSave">🗂 سجّل التشغيل</button>';
-        box.querySelector("#cfSave").onclick = () => VL.notebook.add({ session: "الأجهزة", title: "تشغيل جهاز الطرد المركزي", kind: "machine",
-          summary: st.rpm + " دورة/دقيقة عند r=" + st.r + " سم → " + rcf2.toFixed(0) + " × g (" + (ok ? "ترسيب جيد" : "غير كافٍ") + ")", data: { rpm: st.rpm, r: st.r, rcf: rcf2 } });
-        VL.store.addXP(15, "حساب قوة الطرد المركزي");
+        box.querySelector("#cfSave").onclick = () => { if (W.VL.say) W.VL.say("inst.centrifuge");
+          VL.notebook.add({ session: "الأجهزة", title: "تشغيل جهاز الطرد المركزي", kind: "machine",
+            summary: st.rpm + " دورة/دقيقة عند r=" + st.r + " سم → " + rcf2.toFixed(0) + " × g (" + (ok ? "ترسيب جيد" : "غير كافٍ") + ")", data: { rpm: st.rpm, r: st.r, rcf: rcf2 } });
+          VL.store.addXP(15, "حساب قوة الطرد المركزي"); };
       };
       box.querySelector("#cfInfo").onclick = () => VL.UI.modal("RPM أم g؟", '<p>RPM تصف سرعة الدوران فقط، لكن قوة الطرد الفعلية تعتمد على نصف قطر الدوّار:</p>' +
         '<div class="eq">RCF = 1.118 × 10⁻⁵ × r (cm) × (RPM)²</div><p>جهازان بسرعة 8000 دورة/دقيقة وبنصف قطر مختلف يُنتجان قوتين مختلفتين تمامًا. لذلك تُكتب بروتوكولات الطرد دائمًا بـ <b>×g</b>.</p>');
@@ -432,8 +437,9 @@
         '<div class="note w mt small"><b>حدود الطريقة</b>OD يقيس كل الجسيمات (حتى الميتة منها) ولا يميّز النوع أو الحيوية؛ لذا يُستخدم للمتابعة السريعة، ويُعتمد العدّ على الأطباق أو طرق الأحياء المجهرية عند الحاجة لدقة قانونية.</div></div>';
       box.querySelector("#spOd").oninput = e => { od = +e.target.value; render(); };
       box.querySelector("#spDil").onchange = e => { dil = +e.target.value; render(); };
-      box.querySelector("#spSave").onclick = () => VL.notebook.add({ session: "الأجهزة", title: "قياس الكثافة الضوئية OD600", kind: "machine",
-        summary: "OD = " + od.toFixed(3) + " · تخفيف 1:" + dil + " → " + cells.toExponential(2) + " خلية/مل تقديريًا", data: { od, dil, cells } });
+      box.querySelector("#spSave").onclick = () => { if (W.VL.say) W.VL.say("inst.spectro");
+        VL.notebook.add({ session: "الأجهزة", title: "قياس الكثافة الضوئية OD600", kind: "machine",
+          summary: "OD = " + od.toFixed(3) + " · تخفيف 1:" + dil + " → " + cells.toExponential(2) + " خلية/مل تقديريًا", data: { od, dil, cells } }); };
     };
     render();
   };

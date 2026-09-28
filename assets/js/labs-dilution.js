@@ -61,16 +61,18 @@
       box.querySelector("#transfer").onclick = () => {
         if (level >= TUBES - 1) return;
         level++;
+        if (W.VL.say) W.VL.say(level >= 3 ? "dil.plate" : "dil.transfer");
         VL.UI.toast("تم نقل 1 مل → 10⁻" + (level + 1) + " (مع خلط الأنبوب المصدر قبل النقل)", "c");
         render();
         box.querySelector("#dilMsg").innerHTML = "أصبح لديك تخفيف 10⁻" + (level + 1) + ". " + (level >= 3 ? "جرّب الزرع من تخفيف عالٍ لرؤية مستعمرات قابلة للعدّ." : "استمر في التسلسل.");
       };
-      box.querySelector("#mix").onclick = () => { VL.UI.toast("🌀 خلط جيد — التوزيع أصبح متجانسًا", "g"); VL.store.addXP(2, "خلط الأنبوب"); };
+      box.querySelector("#mix").onclick = () => { VL.UI.toast("🌀 خلط جيد — التوزيع أصبح متجانسًا", "g"); VL.store.addXP(2, "خلط الأنبوب"); if (W.VL.say) W.VL.say("dil.mix"); };
       box.querySelector("#newSample").onclick = () => location.reload();
       box.querySelectorAll("[data-plate]").forEach(b => b.onclick = () => {
         const i = +b.getAttribute("data-plate");
         plated = { tube: i, expected: conc(i) * 0.1 };
         colonies = []; counted = 0; incubated = false;
+        if (W.VL.say) W.VL.say("dil.plate");
         renderPlate();
       });
       renderPlate();
@@ -142,8 +144,10 @@
           VL.UI.toast("العدّ الآلي: " + counted + " مستعمرة (استخدمه للمقارنة فقط — العدّ اليدوي هو المهارة المطلوبة)", "c");
         };
         VL.UI.toast("بعد التحضين ظهرت المستعمرات — ابدأ العدّ بالضغط عليها", "g");
+        if (W.VL.say) W.VL.say("dil.count");
       };
       plateBox.querySelector("#calcBtn").onclick = () => {
+        if (W.VL.say) W.VL.say("dil.calc");
         const cnt = +plateBox.querySelector("#cntIn").value;
         const vol = +plateBox.querySelector("#volIn").value;
         if (!cnt || !vol) { VL.UI.toast("أدخل عدد المستعمرات والحجم المزروع", "w"); return; }

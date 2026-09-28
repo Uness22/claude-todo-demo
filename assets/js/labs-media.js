@@ -59,6 +59,7 @@
       box.querySelector("#mpVol").oninput = e => { volume = +e.target.value || 0; render(); };
       box.querySelector("#mpMode").onchange = e => { mode = e.target.value; render(); };
       box.querySelector("#mpCheck").onclick = () => {
+        if (W.VL.say) W.VL.say("media.prep");
         const g = parseFloat(String(box.querySelector("#mpGuess").value).replace(",", "."));
         const v = parseInt(box.querySelector("#mpVes").value, 10);
         const devG = Math.abs(g - grams) / grams * 100, devV = Math.abs(v - needed);
@@ -69,6 +70,7 @@
         if (devG <= 3 && devV === 0) VL.store.addXP(15, "حساب تحضير وسط صحيح");
       };
       box.querySelector("#mpCook").onclick = () => {
+        if (W.VL.say) W.VL.say("media.cook");
         const steps = [
           ["وزن المسحوق على ورقة وزن على ميزان حساس", "✔ " + grams.toFixed(2) + " غ"],
           ["إضافة الماء المقطر " + volume + " مل + تحريك حتى الذوبان", "✔ محلول متجانس"],
@@ -191,6 +193,7 @@
       box.querySelector("#prMed").onchange = e => { key = e.target.value; org = 0; render(); };
       box.querySelector("#prOrg").onchange = e => { org = +e.target.value; render(); };
       box.querySelector("#prSave").onclick = () => {
+        if (W.VL.say) W.VL.say("media.read");
         VL.notebook.add({ session: "الأوساط والقراءة", title: "قراءة " + p.n + " — " + p.rows[org].o, kind: "media",
           summary: p.rows[org].txt, data: { medium: key, organism: p.rows[org].o } });
         VL.store.addXP(6, "تسجيل قراءة وسط");
@@ -209,6 +212,7 @@
         c.innerHTML = '<div class="card"><h3>🎯 تحدي قراءة الأطباق</h3><p class="small muted">على الوسط <b>' + pi.n + "</b> ظهر المظهر التالي — من هو الكائن؟</p>" +
           '<svg viewBox="0 0 220 220" width="200">' + '<circle cx="110" cy="110" r="96" fill="' + pi.base + '" stroke="rgba(0,0,0,.35)" stroke-width="3"/>' + colonyField(pi, row) + "</svg>" +
           '<div class="mt">' + opts.map(o => '<button class="btn sm mb" style="display:block;width:100%;text-align:start" data-o="' + VL.esc(o) + '">' + o + "</button>").join("") + "</div><div id='prRes' class='mt'></div></div>";
+        if (W.VL.say) W.VL.say("media.challenge");
         c.querySelectorAll("[data-o]").forEach(b => b.onclick = () => {
           const ok = b.getAttribute("data-o") === row.o;
           c.querySelector("#prRes").innerHTML = '<div class="note ' + (ok ? "s" : "d") + '"><b>' + (ok ? "✔ صحيح" : "✘ الإجابة الصحيحة: " + row.o) + "</b>" + row.txt + "</div>" +
