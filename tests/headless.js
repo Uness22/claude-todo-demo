@@ -176,17 +176,22 @@ const scenarios = {
     click("#cfuNew"); setVal("#cfuIn", "100000"); click("#cfuCheck");
     click("#mpnRead"); await wait(200); setVal("#mpnIn", "150"); click("#mpnChk"); click("#mpnNew");
   },
-  "gram.html": async ({ window, $, $$, click, pointer, wait }) => {
+  "gram.html": async ({ window, $, $$, click, pointer, wait, errs }) => {
     for (const r of ["smear", "fix", "cv", "iodine", "decolor", "safranin", "wash"]) {
       if (r === "decolor") {
         const hold = $("#gHoldBtn");
-        if (hold) { pointer(hold, "pointerdown", 10, 10); await wait(900); window.dispatchEvent(new window.MouseEvent("pointerup", { bubbles: true })); await wait(120); }
+        /* زمن مزيل اللون ٢ ثانية = النتيجة الصحيحة (1–3 ث) */
+        if (hold) { pointer(hold, "pointerdown", 10, 10); await wait(2100); window.dispatchEvent(new window.MouseEvent("pointerup", { bubbles: true })); await wait(150); }
       }
       click("[data-r='" + r + "']");
       await wait(60);
     }
     await wait(200);
+    /* تحقّق أن مقطع الخطوة المسجّل هو ما يُشغَّل فعلًا */
+    const au = window.document.querySelector("audio");
+    if (!au || !/gram\.s\d+\.mp3$/.test(au.src || "")) errs.push("لم يُشغَّل مقطع خطوة مسجّل (src=" + (au && au.src) + ")");
     click("#gFinish"); await wait(600);
+    if (au && !/gram\.res1\.mp3$/.test(au.src || "")) errs.push("لم يُشغَّل مقطع حكم النتيجة (src=" + au.src + ")");
     click("#gSave"); await wait(300); click(".modal .x");
   },
   "media.html": async ({ $, $$, click, setVal, wait }) => {

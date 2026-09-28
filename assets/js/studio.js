@@ -219,6 +219,16 @@
     "dilution.html":   { ar: "assets/audio/ar/dilution.mp3",        en: "assets/audio/en/dilution.mp3" },
     "bench.html":      { ar: "assets/audio/ar/bench.mp3",           en: "assets/audio/en/bench.mp3" },
     "microscope.html": { ar: "assets/audio/ar/microscope.mp3",      en: "assets/audio/en/microscope.mp3" },
+    /* عربي — الخطوات الحرجة لصبغة جرام (تُشغَّل لحظة تنفيذ الخطوة) */
+    "gram.s0": { ar: "assets/audio/ar/gram.s0.mp3" },
+    "gram.s1": { ar: "assets/audio/ar/gram.s1.mp3" },
+    "gram.s2": { ar: "assets/audio/ar/gram.s2.mp3" },
+    "gram.s3": { ar: "assets/audio/ar/gram.s3.mp3" },
+    "gram.s4": { ar: "assets/audio/ar/gram.s4.mp3" },
+    "gram.s5": { ar: "assets/audio/ar/gram.s5.mp3" },
+    "gram.s6": { ar: "assets/audio/ar/gram.s6.mp3" },
+    "gram.s7": { ar: "assets/audio/ar/gram.s7.mp3" },
+    "gram.res1": { ar: "assets/audio/ar/gram.res1.mp3" },
     /* الإنجليزية — الصفحات الثلاث المتبقية + الوحدات الإضافية */
     "safety.html":     { en: "assets/audio/en/safety.mp3",      ar: "assets/audio/ar/safety.mp3" },
     "media.html":      { en: "assets/audio/en/media.mp3",       ar: "assets/audio/ar/media.mp3" },
@@ -227,7 +237,7 @@
     "curriculum.html": { en: "assets/audio/en/curriculum.mp3",  ar: "assets/audio/ar/curriculum.mp3" },
     "videos.html":     { en: "assets/audio/en/videos.mp3",      ar: "assets/audio/ar/videos.mp3" },
     "quiz.html":       { en: "assets/audio/en/quiz.mp3",        ar: "assets/audio/ar/quiz.mp3" },
-    "notebook.html":   { en: "assets/audio/en/notebook.mp3" }
+    "notebook.html":   { en: "assets/audio/en/notebook.mp3", ar: "assets/audio/ar/notebook.mp3" }
   };
 
   /* =====================================================================
@@ -258,6 +268,12 @@
       return c[this.lang] || null;
     },
     isRecorded(key) { return !!this.clipFor(key); },
+    /* كم مقطعًا مسجّلًا يخصّ هذه الصفحة (المقدمة + خطواتها) */
+    clipsFor(page) {
+      const slim = (page || "").replace(/\.html$/, "");
+      const all = Object.keys(CLIPS).filter(k => k === page || k === slim + ".html" || k.indexOf(slim + ".") === 0);
+      return all.filter(k => CLIPS[k][this.lang]).length;
+    },
 
     /* نطق نص حرّ */
     utter(text) {
@@ -607,8 +623,9 @@
       const en = vs.filter(v => (v.lang || "").toLowerCase().indexOf("en") === 0).length;
       const recAr = Object.keys(CLIPS).filter(k => CLIPS[k].ar).length;
       const recEn = Object.keys(CLIPS).filter(k => CLIPS[k].en).length;
+      const stepsAr = Object.keys(CLIPS).filter(k => k.indexOf(".") > 0 && CLIPS[k].ar).length;
       n.innerHTML = "🎙 مقاطع مسجّلة بصوت راوٍ مختار: <b>" + recAr + " عربي</b> · <b>" + recEn + " إنجليزي</b> " +
-        "(مقدّمات الوحدات وشرح خطواتها الحرجة). " +
+        "(منها <b>" + stepsAr + "</b> لخطوات تنفيذ حرجة تُشغَّل لحظة تنفيذها). " +
         "أصوات المتصفح الاحتياطية المتاحة في نظامك: " + ar + " عربي · " + en + " إنجليزي. " +
         (ar === 0 && voice.lang === "ar" ? "لا صوت عربي مثبّت — الشروح المسجّلة تغطي الوحدات الرئيسية، ويمكنك تثبيت حزمة الصوت العربي من إعدادات النظام. " : "");
     },
@@ -618,7 +635,8 @@
     paint() {
       const d = this.el; if (!d) return;
       const pb = $("#stPlay");
-      if (pb) pb.innerHTML = voice.isRecorded(location.pathname.split("/").pop() || "index.html") ? "▶ اسمع الشرح (🎙 صوت مسجّل)" : "▶ اسمع الشرح (🔊 صوت المتصفح)";
+      const page0 = location.pathname.split("/").pop() || "index.html", n0 = voice.clipsFor(page0);
+      if (pb) pb.innerHTML = (n0 ? "▶ اسمع الشرح (🎙 " + n0 + " مقطعًا مسجّلًا)" : "▶ اسمع الشرح (🔊 صوت المتصفح)");
       const rec0 = rec.on;
       $("#stRec").classList.toggle("hide", rec0);
       $("#stPause").classList.toggle("hide", !rec0);
@@ -654,7 +672,7 @@
     $$("[data-record]").forEach(host => host.appendChild(rec.quickButton(host.getAttribute("data-record"))));
     /* وسم زر شرح الصفحة: مسجّل بصوت راوٍ أم صوت المتصفح */
     const pb0 = $("#stPlay");
-    if (pb0) pb0.innerHTML = voice.isRecorded(location.pathname.split("/").pop() || "index.html") ? "▶ اسمع الشرح (🎙 صوت مسجّل)" : "▶ اسمع الشرح (🔊 صوت المتصفح)";
+    if (pb0) pb0.innerHTML = voice.clipsFor(location.pathname.split("/").pop() || "index.html") ? "▶ اسمع الشرح (🎙 صوت مسجّل)" : "▶ اسمع الشرح (🔊 صوت المتصفح)";
     /* تشغيل تلقائي للصفحة عند أول تفاعل (المتصفحات تمنع التشغيل قبل ذلك) */
     if (voice.on && LS.get("narr.autoplay", true)) {
       const once = () => {
