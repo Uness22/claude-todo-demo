@@ -5,6 +5,23 @@
 
 ---
 
+## ٠) الأسرع: افتحه من رابط (بعد تفعيل Pages مرة واحدة)
+
+1. **Settings → Pages** في المستودع
+2. تحت **Build and deployment** اختر Source: **GitHub Actions**
+3. **Save** → ثم تبويب **Actions** → «نشر الموقع على GitHub Pages» → **Run workflow**
+
+بعدها يصبح الموقع على الرابط التالي، ويُحدَّث تلقائيًا مع كل تعديل:
+
+```
+https://uness22.github.io/claude-todo-demo/
+```
+
+> بدائل فورية بلا إعداد: (١) نزّل ZIP وشغّل `python3 -m http.server` محليًا،
+> (٢) أو اسحب مجلد المشروع إلى [app.netlify.com/drop](https://app.netlify.com/drop) فيصبح على رابط عام في ثوانٍ.
+
+---
+
 ## ١) الطريقة الأسهل: تحميل ملف ZIP (بدون git)
 
 1. افتح صفحة المستودع: `https://github.com/Uness22/claude-todo-demo`
