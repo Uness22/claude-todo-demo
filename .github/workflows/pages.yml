@@ -1,8 +1,12 @@
 name: نشر الموقع على GitHub Pages
 
-# ينشر المعمل الافتراضي تلقائيًا على رابط عام جاهز للاستخدام من أي جهاز:
-#   https://uness22.github.io/claude-todo-demo/
-# مع تفعيل Pages تلقائيًا (enablement) إن لم تكن مُفعّلة من الإعدادات.
+# ينشر المعمل الافتراضي تلقائيًا على رابط عام:
+#     https://uness22.github.io/claude-todo-demo/
+#
+# تشغيله لأول مرة يحتاج تفعيل Pages من إعدادات المستودع مرة واحدة:
+#     Settings → Pages → Source: GitHub Actions → Save
+#   ثم: Actions → «نشر الموقع على GitHub Pages» → Run workflow
+# بعد ذلك يُعاد النشر تلقائيًا مع كل تعديل على main.
 
 on:
   push:
@@ -28,16 +32,36 @@ jobs:
       - name: جلب الملفات
         uses: actions/checkout@v4
 
-      - name: تجهيز Pages (مع محاولة التفعيل التلقائي)
+      - name: تجهيز Pages (ومحاولة التفعيل التلقائي)
+        id: cfg
+        continue-on-error: true
         uses: actions/configure-pages@v5
         with:
           enablement: true
 
+      - name: تعليمات إن لم يكن Pages مُفعَّلًا
+        if: steps.cfg.outcome == 'failure'
+        run: |
+          {
+            echo "### ⚠️ GitHub Pages غير مُفعَّل بعد"
+            echo ""
+            echo "الموقع جاهز للنشر، وينقصه تفعيل Pages مرة واحدة من صاحب المستودع:"
+            echo ""
+            echo "1. Settings → Pages"
+            echo "2. تحت **Build and deployment** اختر Source: **GitHub Actions**"
+            echo "3. اضغط Save، ثم أعد تشغيل هذا العمل (Re-run) أو ادْفع أي تعديل إلى main"
+            echo ""
+            echo "بعدها سيظهر الموقع على: https://uness22.github.io/claude-todo-demo/"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::warning::فعّل GitHub Pages من Settings → Pages → Source: GitHub Actions ثم أعد التشغيل."
+
       - name: رفع الموقع كحزمة نشر
+        if: steps.cfg.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
       - name: النشر
         id: deployment
+        if: steps.cfg.outcome == 'success'
         uses: actions/deploy-pages@v4

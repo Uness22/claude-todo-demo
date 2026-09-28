@@ -9,6 +9,10 @@
     python3 -m http.server 8000        ثم افتح  http://localhost:8000
 ```
 
+> 🌐 **رابط مباشر (بدون أي تنزيل):** `https://uness22.github.io/claude-todo-demo/`
+> — يُفعَّل من: **Settings → Pages → Source: GitHub Actions** مرة واحدة، وبعدها يُنشر تلقائيًا مع كل تعديل.
+> إن لم يكن مُفعَّلًا بعد، اقترحنا في [START-HERE.md](START-HERE.md) ثلاث طرق أخرى للتشغيل الفوري.
+
 > **تريد تنزيله وتشغيله على جهازك الآن؟** اقرأ **[START-HERE.md](START-HERE.md)** — طريقة التحميل من GitHub والتشغيل والاستوديو الصوتي في خطوات.
 
 ## ماذا يوجد في المعمل؟ (13 وحدة)
