@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>المجهر الافتراضي — المعمل الافتراضي لميكروبيولوجيا الغذاء</title>
+<meta name="description" content="مجهر افتراضي تفاعلي: عدسات 4× إلى 100× بالزيت، بؤرة وإضاءة ومكثف قابل للضبط، شرائح بكتيريا وخمائر وأعفان وفيروسات، وقياس بالميكرومتر.">
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+
+  <div class="hero">
+    <span class="tag">الوحدة ٠٥ — الفحص المجهري</span>
+    <h1>🔬 المجهر الافتراضي — شاهد البكتيريا والخمائر والفيروسات كما في المعمل الحقيقي</h1>
+    <p class="muted" style="max-width:900px">
+      هنا تجلس أمام مجهر ضوئي مركّب كامل: حامل شرائح فيه أكثر من ثلاثين شريحة مجهّزة، عدسات شيئية
+      (4× · 10× · 40× · 100× بالزيت)، مِصْباح شدّته قابلة للتنظيم، مكثّف بفتحة عدسة (Iris)، وبؤرة خشنة ودقيقة.
+      حرّك البؤرة وراقب كيف تظهر الخلايا وتختفي، أضف زيت الغمر، وقِس أبعاد كل خلية بالميكرومتر لتتعلّم أن
+      العين لا تكفي — لا بدّ من القياس.
+    </p>
+    <div class="row mt">
+      <span class="pill">🦠 ٣٦ شريحة مجهّزة</span>
+      <span class="pill">💧 محاكاة زيت الغمر</span>
+      <span class="pill">📏 مسطرة عينية معايَرة تلقائيًا</span>
+      <span class="pill">🎬 فيديوهات عملية</span>
+      <span class="pill">🎯 تحدي تحديد الشكل</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>كيف تستخدم هذه الوحدة؟</b>
+    ابدأ باختيار شريحة من <b>حامل الشرائح</b> على اليسار، ثم اتّبع قائمة التشغيل المكتوبة تحته:
+    ضع الشريحة ← ابدأ بالعدسة الصغرى (4×) ← انتقل تدريجيًا (10× ثم 40× ثم 100×) ← أضف زيت الغمر ←
+    اضبط الإضاءة والمكثّف ← اضبط البؤرة الدقيقة ← <b>اضغط على خلية</b> لقياسها ← احفظ الحقل في دفتر المعمل.
+    تُسجَّل كل خطوة في نسبة إتمامك للوحدة، وتمنحك نقاط خبرة وشارة «أتقن تشغيل المجهر».
+  </div>
+
+  <h2 class="mt">🧑‍🔬 منصة العمل التفاعلية</h2>
+  <div id="bench"></div>
+
+  <div class="section-head"><h2>🧩 تشريح المجهر الضوئي المركّب</h2><span class="bar"></span></div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="instrument-figure">
+        <svg viewBox="0 0 320 420" width="300" style="max-width:100%">
+          <defs>
+            <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3b4a5a"/><stop offset="1" stop-color="#1b242e"/>
+            </linearGradient>
+          </defs>
+          <!-- base -->
+          <rect x="60" y="360" width="200" height="34" rx="14" fill="url(#metal)" stroke="#0b1219"/>
+          <!-- arm -->
+          <path d="M232 372 q26 -10 26 -46 v-210 q0 -30 -28 -34 l-40 -6 v34 l30 6 v206 q0 22 -18 30 z" fill="url(#metal)" opacity=".95"/>
+          <!-- stage -->
+          <rect x="70" y="252" width="150" height="14" rx="5" fill="#2c3a48" stroke="#0b1219"/>
+          <rect x="96" y="266" width="60" height="8" rx="3" fill="#22303d"/>
+          <!-- condenser + iris -->
+          <path d="M104 284 h56 l-10 22 h-36 z" fill="#33465a" stroke="#0b1219"/>
+          <circle cx="132" cy="298" r="6" fill="#22d3ee" opacity=".8"/>
+          <rect x="150" y="288" width="26" height="4" rx="2" fill="#94a3b8"/>
+          <!-- light -->
+          <path d="M118 330 h34 l6 16 h-46 z" fill="#3a4a5b" stroke="#0b1219"/>
+          <circle cx="135" cy="318" r="9" fill="#fde68a" opacity=".9"/>
+          <!-- nosepiece + objectives -->
+          <ellipse cx="150" cy="216" rx="62" ry="14" fill="#33465a" stroke="#0b1219"/>
+          <rect x="106" y="222" width="16" height="34" rx="4" fill="#4b5f74"/>
+          <rect x="132" y="222" width="18" height="46" rx="4" fill="#3f5266"/>
+          <rect x="158" y="222" width="18" height="60" rx="4" fill="#2f4152"/>
+          <rect x="184" y="222" width="18" height="74" rx="4" fill="#263645"/>
+          <!-- eyepiece / tube -->
+          <rect x="126" y="70" width="46" height="26" rx="8" fill="#33465a" stroke="#0b1219"/>
+          <rect x="132" y="96" width="34" height="96" rx="6" fill="#2b3b4a" stroke="#0b1219"/>
+          <path d="M116 96 h66 l-8 -12 h-50 z" fill="#3f5266"/>
+          <!-- knobs -->
+          <circle cx="236" cy="206" r="20" fill="#33465a" stroke="#0b1219"/><circle cx="236" cy="206" r="10" fill="#23303c"/>
+          <circle cx="236" cy="258" r="14" fill="#2b3b4a" stroke="#0b1219"/><circle cx="236" cy="258" r="7" fill="#1b2530"/>
+          <!-- slide -->
+          <rect x="92" y="246" width="86" height="6" rx="2" fill="#bae6fd" opacity=".85"/>
+          <!-- labels -->
+          <g font-size="11" fill="#9fb3c6">
+            <line x1="118" y1="70" x2="70" y2="42" stroke="#22d3ee" stroke-width=".8"/><text x="8" y="38">١ العدسة العينية</text>
+            <line x1="150" y1="140" x2="70" y2="120" stroke="#22d3ee" stroke-width=".8"/><text x="8" y="116">٢ أنبوب المجهر</text>
+            <line x1="150" y1="216" x2="66" y2="190" stroke="#22d3ee" stroke-width=".8"/><text x="8" y="186">٣ الحامل الدوّار</text>
+            <line x1="190" y1="250" x2="60" y2="222" stroke="#22d3ee" stroke-width=".8"/><text x="8" y="218">٤ العدسات الشيئية</text>
+            <line x1="140" y1="258" x2="66" y2="278" stroke="#22d3ee" stroke-width=".8"/><text x="8" y="282">٥ المنصة والمشابك</text>
+            <line x1="132" y1="293" x2="66" y2="308" stroke="#22d3ee" stroke-width=".8"/><text x="8" y="318">٦ المكثّف وفتحة العدسة</text>
+            <line x1="134" y1="318" x2="70" y2="344" stroke="#22d3ee" stroke-width=".8"/><text x="8" y="352">٧ المصباح</text>
+            <line x1="236" y1="206" x2="286" y2="192" stroke="#22d3ee" stroke-width=".8"/><text x="248" y="188">٨ البؤرة الخشنة</text>
+            <line x1="236" y1="258" x2="288" y2="256" stroke="#22d3ee" stroke-width=".8"/><text x="252" y="252">٩ البؤرة الدقيقة</text>
+            <line x1="250" y1="330" x2="292" y2="330" stroke="#22d3ee" stroke-width=".8"/><text x="252" y="326">١٠ الذراع</text>
+          </g>
+        </svg>
+      </div>
+      <p class="small muted">الوصف التفصيلي لكل جزء موجود في الجدول المجاور — ومعظم هذه الأجزاء قابل للتغيير فعليًا في المنصة التفاعلية أعلاه.</p>
+    </div>
+    <div class="card">
+      <h3>🗂 أجزاء المجهر ووظائفها</h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>الجزء</th><th>الوظيفة</th><th>ملاحظة عملية</th></tr></thead>
+          <tbody>
+            <tr><td>العدسة العينية (Eyepiece)</td><td>تكبير الصورة القادمة من العدسة الشيئية (غالبًا 10×)</td><td>قد تحتوي مسطرة عينية للقياس — لا بد من معايرتها</td></tr>
+            <tr><td>العدسات الشيئية (Objectives)</td><td>التكبير الحقيقي: 4× · 10× · 40× · 100×</td><td>لا تُحرَّك بمسك العدسة نفسها، بل بالحامل الدوّار</td></tr>
+            <tr><td>الحامل الدوّار (Nosepiece)</td><td>تغيير العدسة بسهولة بدون تحريك الشريحة</td><td>الأهم: العدسات «شبه بؤرية» Parfocal</td></tr>
+            <tr><td>المنصة والمشابك</td><td>تثبيت الشريحة أمام العدسة</td><td>المشابك تمنع حركة الشريحة عند التكبير العالي</td></tr>
+            <tr><td>المكثّف (Condenser)</td><td>تركيز الضوء على العينة</td><td>ضبطه ضروري للحصول على صورة ساطعة متجانسة</td></tr>
+            <tr><td>فتحة العدسة (Iris)</td><td>تنظيم كمية الضوء وتباين العينة</td><td>غلقها يزيد التباين ويقلّل الإيضاح للعدسات القوية</td></tr>
+            <tr><td>البؤرة الخشنة (Coarse)</td><td>حركة كبيرة للمنصة/الأنبوب</td><td>تُستخدم فقط مع العدسات 4× و10×</td></tr>
+            <tr><td>البؤرة الدقيقة (Fine)</td><td>حركة صغيرة جدًا للبؤرة</td><td>الأداة الوحيدة مع عدسة 100×</td></tr>
+            <tr><td>المصباح</td><td>مصدر الضوء</td><td>ابدأ بالإضاءة المنخفضة ثم زد تدريجيًا</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>🧠 الفكرة العلمية: التكبير ≠ الإيضاح</h2><span class="bar"></span></div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>⚙️ حساب التكبير</h3>
+      <div class="eq">Total Magnification = Objective × Eyepiece</div>
+      <p class="small">عدسة عينية 10× + شيئية 100× = تكبير 1000×. عند هذه القيمة تكون البكتيريا (2 µm) بطول 2 مم على الشاشة أو على شبكية العين.</p>
+      <h3 class="mt">📐 حد الإيضاح (Resolution)</h3>
+      <div class="eq">d = 0.61 λ / NA</div>
+      <p class="small">
+        حيث λ = 550 نانومتر (الضوء الأخضر) و NA = الفتحة العددية للعدسة. مع عدسة هوائية NA = 0.65 فإن
+        d ≈ 0.52 µm؛ ومع عدسة زيت NA = 1.25 فإن d ≈ 0.27 µm. أي أن <b>الزيت لا يزيد التكبير بل يزيد الإيضاح</b>
+        (قدرة العدسة على تمييز نقطتين متقاربتين).
+      </p>
+      <div class="note w"><b>لماذا لا يمكن رؤية الفيروسات بالمجهر الضوئي؟</b>
+        لأن أصغر حد إيضاح نظري (~200 نانومتر بالضوء المرئي) أكبر من أحجام الفيروسات (20–300 نانومتر).
+        لذلك تُفحص بالمجهر الإلكتروني (شرائح EM في حامل الشرائح أعلاه).</div>
+    </div>
+    <div class="card">
+      <h3>💧 زيت الغمر — الفيزياء العملية</h3>
+      <p class="small">
+        عندما يعبر الضوء من الزجاج إلى الهواء ينحرف (انكسار) وتفقد العدسة جزءًا من الأشعة المتباينة،
+        فيقلّ الإيضاح. زيت الغمر معامل انكساره (n ≈ 1.515) قريب جدًا من زجاج الشريحة (n ≈ 1.5)،
+        فيمرّ الضوء في خط مستقيم إلى العدسة وترتفع NA إلى 1.25.
+      </p>
+      <ul class="list-dot small">
+        <li>يوضع <b>قطرة واحدة فقط</b> على الشريحة ثم تُدخل العدسة 100× ببطء.</li>
+        <li>لا تستخدم البؤرة الخشنة مع 100× أبدًا — خوفًا من كسر العدسة أو الشريحة.</li>
+        <li>بعد الانتهاء: نظّف العدسة بورق عدسات ومذيب مناسب فورًا.</li>
+        <li>لا تخلط زيتًا مع عدسة هوائية — الصورة ستكون ضبابية.</li>
+      </ul>
+      <div class="note s"><b>مبدأ كوهلر (Köhler Illumination)</b>
+        اضبط المكثّف أولًا ثم فتحة العدسة، وستحصل على إضاءة متجانسة وصورة متباينة وأفضل إيضاح ممكن.</div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>📏 سلّم الأحجام: ما الذي تراه فعلًا؟</h2><span class="bar"></span></div>
+  <div class="card">
+    <p class="small muted">المقياس لوغاريتمي (كل خطوة = ضعف الحجم تقريبًا). لاحظ الفجوة الهائلة بين البكتيريا والفيروسات، ولماذا يحتاج كل كائن عدسة مختلفة.</p>
+    <div id="sizeChart"></div>
+  </div>
+
+  <div class="section-head"><h2>🧪 أخطاء شائعة في الفحص المجهري</h2><span class="bar"></span></div>
+  <div class="grid g3">
+    <div class="card"><h3>🌫 صورة ضبابية</h3><ul class="list-check small"><li>البؤرة غير مضبوطة — استخدم البؤرة الدقيقة.</li><li>لم يُضف زيت الغمر مع العدسة 100×.</li><li>شوائب على العدسة (البقعة ثابتة عند تحريك الشريحة).</li><li>الشريحة مبللة أو سميكة.</li></ul></div>
+    <div class="card"><h3>🌑 مجال مظلم أو محروق</h3><ul class="list-check small"><li>شدة المصباح منخفضة جدًا (لا تُبالغ في الفتح).</li><li>فتحة المكثّف مغلقة أو مفتوحة تمامًا.</li><li>المكثّف غير مرفوع لمستوى الشريحة.</li></ul></div>
+    <div class="card"><h3>🔴 ألوان الصبغة غير متوقعة</h3><ul class="list-check small"><li>نسيان خطوة السافرانين (كل شيء بنفسجي).</li><li>زيادة الشطف بالكحول (كل شيء وردي).</li><li>لطخة سميكة — لا يتخللها الكاشف.</li><li>العمر الزائد لمحاليل الصبغة.</li></ul></div>
+  </div>
+
+  <div class="section-head"><h2>🎬 فيديوهات عملية لهذه الوحدة</h2><span class="bar"></span></div>
+  <div class="grid g3" id="vidBox"></div>
+  <div class="row mt"><a class="btn primary" href="videos.html">كل الفيديوهات العملية ←</a></div>
+
+  <div class="section-head"><h2>📝 اختبار الوحدة</h2><span class="bar"></span></div>
+  <div id="quizBox"></div>
+
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+VL.boot();
+SCOPE.bench(document.getElementById('bench'));
+PAGES.sizeChart(document.getElementById('sizeChart'));
+PAGES.videoCards(document.getElementById('vidBox'), { tags: ['مجهر', 'تحضير الشرائح'], n: 3 });
+PAGES.quizWidget(document.getElementById('quizBox'), 'microscope', 7);
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الزرع والتقنيات المعقّمة — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ٠٣ — منصة الزرع</span>
+    <h1>🧫 الزرع والتقنيات المعقّمة — من أنبوب اللقاح إلى مستعمرة نقية</h1>
+    <p class="muted" style="max-width:920px">في هذا القسم تتعلّم أهمّ مهارة عملية في الميكروبيولوجيا: كيف تنقل كائنًا دقيقًا دون تلويثه ودون أن يلوّثك.
+    ستتمرّن على النقل المعقّم خطوة بخطوة، ثم ترسم <b>طبق الخطوط الأربعة</b> على شاشة تفاعلية، وتحضنه وترى النمو الحقيقي المتوقّع بعد ٢٤ ساعة.</p>
+    <div class="row mt"><span class="pill">🔥 ~ نطاق العمل المعقّم</span><span class="pill">🧫 طبق الخطوط الأربعة</span><span class="pill">💧 عروة وماصة</span><span class="pill">🌀 طبق النشر والصب</span></div>
+  </div>
+
+  <div class="section-head"><h2>① تمرين النقل المعقّم (Aseptic Transfer)</h2><span class="bar"></span></div>
+  <div id="asepticMount"></div>
+
+  <div class="section-head"><h2>② طبق الخطوط الأربعة — ارسم واحضن</h2><span class="bar"></span></div>
+  <div id="streakMount"></div>
+
+  <div class="section-head"><h2>③ تقنيات الزرع الأساسية</h2><span class="bar"></span></div>
+  <div class="grid g3" id="techGallery"></div>
+
+  <div class="section-head"><h2>📖 مبادئ ونقاط حرجة</h2><span class="bar"></span></div>
+  <div class="grid g2">
+    <div class="card"><h3>🔥 نطاق العمل المعقّم (Aseptic Field)</h3>
+      <p class="small">الهواء المتحرّك هو العدو الأول. لهب المِشعل ينشئ تيارًا صاعدًا يقلل سقوط الجسيمات على العمل، لذا نعمل في دائرة قطرها ~20 سم حول اللهب، ونقصر مدد فتح الأنابيب والأطباق.</p>
+      <ul class="list-dot small">
+        <li>لا تتكّلم فوق الطبق المفتوح.</li>
+        <li>افتح الغطاء بزاوية 45° لا ترفعه كاملًا.</li>
+        <li>عقّم العروة من أصله حتى الاحمرار ثم برّدها قرب اللهب.</li>
+        <li>لا تضع الغطاء على المنصة — احمله بيدك.</li>
+      </ul></div>
+    <div class="card"><h3>🧫 تسمية الأطباق قبل التحضين</h3>
+      <ul class="list-dot small">
+        <li>رقم العيّنة/المجموعة + نوع الوسط + التخفيف + التاريخ.</li>
+        <li>يُكتب على قاعدة الطبق لا على الغطاء (فالغطاء قد يتبدّل).</li>
+        <li>يُقلب الطبق أثناء التحضين لتجنّب تكاثف الماء الذي ينشر المستعمرات.</li>
+        <li>لا تفتح الأطباق المُلَقّحة لتشمّ أو «تفحص» بغير لزوم.</li>
+      </ul></div>
+    <div class="card"><h3>🌡 درجة الحرارة والزمن</h3>
+      <div class="tblwrap"><table><tbody>
+        <tr><th>37°م / 24 س</th><td>مسببات الأمراض (سالمونيلا، ليستيريا، S. aureus)</td></tr>
+        <tr><th>30°م / 72 س</th><td>العدّ الكلي لمنتجات الألبان والفلورا العامة</td></tr>
+        <tr><th>25°م / 5 أيام</th><td>الخمائر والأعفان</td></tr>
+        <tr><th>42°م / 48 س</th><td>العطيفة (جو دقيق الأكسجين)</td></tr>
+      </tbody></table></div></div>
+    <div class="card"><h3>⚠️ أخطاء تدمّر التجربة</h3>
+      <ul class="list-check small">
+        <li class="no">تبريد غير كافٍ للعروة: قتل اللقاح + رذاذ ملوّث.</li>
+        <li class="no">عدم تعقيم العروة بين الخطوط: نمو كثيف بلا مستعمرات منفصلة.</li>
+        <li class="no">مسافة العمل بعيدة عن اللهب: تلوّث جوي.</li>
+        <li class="no">قلب الطبق بعد التحضين بدل قبله: انتشار المستعمرات بالتكاثف.</li>
+      </ul></div>
+  </div>
+
+  <div class="section-head"><h2>🎬 فيديوهات عملية للتقنيات</h2><span class="bar"></span></div>
+  <div class="grid g3" id="vidBox"></div>
+
+  <div class="section-head"><h2>📝 اختبار التقنيات</h2><span class="bar"></span></div>
+  <div id="quizBox"></div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="assets/js/labs-bench.js"></script>
+<script>
+VL.boot();
+LABS.aseptic(document.getElementById('asepticMount'));
+LABS.streak(document.getElementById('streakMount'));
+LABS.techniqueGallery(document.getElementById('techGallery'));
+PAGES.videoCards(document.getElementById('vidBox'), { tags: ['زرع', 'عزل', 'تعقيم'], n: 3 });
+PAGES.quizWidget(document.getElementById('quizBox'), 'techniques', 7);
+</script>
+</body>
+</html>

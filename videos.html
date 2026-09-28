@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الفيديوهات العملية والرسوم التفاعلية — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ١١ — المكتبة المرئية</span>
+    <h1>🎬 الفيديوهات العملية + رسوم متحركة تعمل بدون إنترنت</h1>
+    <p class="muted" style="max-width:960px">
+      المعمل الحقيقي يُرى بالعين قبل أن يُقرأ في كتاب. هنا مكتبة منسّقة من فيديوهات عملية حقيقية من قنوات جامعية ومراجع تعليمية
+      (تعمل عند وجود اتصال بالإنترنت)، بجانب <b>رسوم متحركة تفاعلية مبنية داخل التطبيق</b> تعمل دون إنترنت تمامًا لشرح المفاهيم الحرجة:
+      منحنى النمو، بصريات زيت الغمر، منحنى القتل الحراري، ودورات PCR.
+    </p>
+    <div class="row mt"><span class="pill">🌐 فيديوهات يوتيوب (٣٣)</span><span class="pill">📴 رسوم متحركة دون إنترنت</span><span class="pill">🎯 منسّقة حسب الوحدة</span></div>
+  </div>
+
+  <div class="section-head"><h2>🧠 رسوم متحركة تفاعلية (بدون إنترنت)</h2><span class="bar"></span></div>
+  <div class="grid g2">
+    <div id="animGrowth"></div>
+    <div id="animOil"></div>
+    <div id="animThermal"></div>
+    <div id="animPcr"></div>
+  </div>
+
+  <div class="section-head"><h2>🎬 مكتبة الفيديوهات العملية</h2><span class="bar"></span></div>
+  <div class="card">
+    <div class="row between">
+      <div class="chips" id="vFilter"></div>
+      <div class="row">
+        <label class="f" style="margin:0">اللغة:</label>
+        <select id="vLang" style="width:auto"><option value="all">الكل</option><option value="ar">عربي</option><option value="en">English</option></select>
+        <input type="search" id="vSearch" placeholder="ابحث في العناوين…" style="width:220px">
+      </div>
+    </div>
+    <p class="small dim mt">الفيديوهات مستضافة على يوتيوب وتُعرض عند الضغط (تُفتح داخل الصفحة بصيغة محمية). تُمنح نقاط خبرة عند مشاهدة أي فيديو.</p>
+  </div>
+  <div class="grid g3 mt" id="vGrid"></div>
+
+  <div class="section-head"><h2>📋 كيف تستفيد من الفيديو عمليًا؟</h2><span class="bar"></span></div>
+  <div class="grid g3">
+    <div class="card"><h3>قبل المشاهدة</h3><ul class="list-dot small"><li>اقرأ خطوات الجلسة في <a href="curriculum.html">الدليل العملي</a>.</li><li>توقّع النتيجة مسبقًا واكتبها.</li></ul></div>
+    <div class="card"><h3>أثناء المشاهدة</h3><ul class="list-dot small"><li>لاحظ: كيف يُمسك العروة؟ كم ثانية للأصباغ؟ كيف تُضاف قطرة الزيت؟</li><li>دوّن الفروق بين الفيديو ومحاكاتك.</li></ul></div>
+    <div class="card"><h3>بعد المشاهدة</h3><ul class="list-dot small"><li>أعد تنفيذ المحاكاة في التطبيق بدون أخطاء.</li><li>سجّل النتائج في دفترك واختبر نفسك.</li></ul></div>
+  </div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+VL.boot();
+
+/* --- offline animations (self-contained, work without internet) --- */
+PAGES.animationCard(document.getElementById('animGrowth'), 'growthCurve',
+  '📈 منحنى النمو البكتيري',
+  'أربع مراحل: Lag (تأقلم) → Log (نمو أُسّي) → Stationary (ثبات) → Death (موت). فهمها يفسّر لماذا نبرّد الأغذية بسرعة ولماذا يهم زمن التحضين.');
+PAGES.animationCard(document.getElementById('animOil'), 'oilOptics',
+  '💧 بصريات زيت الغمر',
+  'شاهد أثر الهواء مقابل الزيت على مسار الضوء وحد الإيضاح مع العدسة 100×: الزيت يمنع انحراف الأشعة فيرفع NA إلى 1.25.',
+  '<button class="btn sm primary" data-oil="1">أضف زيت الغمر 💧</button>');
+PAGES.animationCard(document.getElementById('animThermal'), 'thermalDeath',
+  '🌡 منحنى القتل الحراري و D-value',
+  'القيمة D هي الزمن اللازم لقتل 90% من العدد (إنقاص لوغاريتم واحد). حرّك المؤشرين لترى أثر D والعدد الابتدائي على زمن القتل الكامل.',
+  '<div class="row"><label class="small">D (دقائق)</label><input type="range" data-d min="1" max="10" step=".5" value="3"><span class="badge c" data-dv>3 دقائق</span></div>' +
+  '<div class="row mt"><label class="small">العدد الابتدائي لوغاريتميًا</label><input type="range" data-n min="4" max="9" step="1" value="7"><span class="badge c" data-nv>10^7</span></div>');
+PAGES.animationCard(document.getElementById('animPcr'), 'pcr',
+  '🧬 دورات PCR',
+  'ثلاث خطوات حرارية تتكرر: 95°م تفكيك ← 55°م التحام البريميرات ← 72°م استطالة. لاحظ تضاعف عدد النسخ في كل دورة (2ⁿ).');
+
+/* --- video library --- */
+const vFilter = document.getElementById('vFilter');
+const tags = Array.from(new Set(DATA.VIDEOS.reduce((a, v) => a.concat(v.tags), [])));
+let curTag = 'all', curLang = 'all', term = '';
+vFilter.innerHTML = '<button class="chip on" data-t="all">كل المواضيع</button>' + tags.map(t => '<button class="chip" data-t="' + t + '">#' + t + '</button>').join('');
+function drawVideos() {
+  const list = DATA.VIDEOS.filter(v =>
+    (curTag === 'all' || v.tags.indexOf(curTag) >= 0) &&
+    (curLang === 'all' || v.lang === curLang) &&
+    (!term || (v.t + v.ch + v.note).toLowerCase().indexOf(term.toLowerCase()) >= 0));
+  const grid = document.getElementById('vGrid');
+  grid.innerHTML = '';
+  if (!list.length) { grid.innerHTML = '<p class="muted">لا نتائج — جرّب كلمة أخرى.</p>'; return; }
+  const box = document.createElement('div');
+  grid.className = 'grid g3';
+  list.forEach(v => {
+    const c = document.createElement('div');
+    c.className = 'vcard';
+    c.innerHTML = '<div class="vthumb" style="background:linear-gradient(135deg,#0b1220,#132030)">' +
+      '<img src="https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85" onerror="this.style.display=\'none\'">' +
+      '<span class="play">▶</span><span class="badge ' + (v.lang === 'ar' ? 'g' : 'c') + '" style="position:absolute;top:8px;inset-inline-start:8px">' + (v.lang === 'ar' ? 'عربي' : 'English') + '</span></div>' +
+      '<div class="vmeta"><b>' + VL.esc(v.t) + '</b><span class="src">' + VL.esc(v.ch) + '</span><p class="tiny muted" style="margin:4px 0 0">' + VL.esc(v.note || '') + '</p>' +
+      '<div class="vtags">' + v.tags.map(x => '<span class="pill">#' + VL.esc(x) + '</span>').join('') + '</div></div>';
+    c.querySelector('.vthumb').onclick = () => {
+      c.querySelector('.vthumb').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0&autoplay=1" allowfullscreen allow="autoplay;encrypted-media;picture-in-picture" title="' + VL.esc(v.t) + '"></iframe>';
+      VL.store.addXP(3, 'مشاهدة فيديو عملي');
+    };
+    grid.appendChild(c);
+  });
+}
+vFilter.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  curTag = b.getAttribute('data-t');
+  vFilter.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === b));
+  drawVideos();
+});
+document.getElementById('vLang').onchange = e => { curLang = e.target.value; drawVideos(); };
+document.getElementById('vSearch').oninput = e => { term = e.target.value; drawVideos(); };
+drawVideos();
+VL.store.addXP(5, 'زيارة مكتبة الفيديو');
+</script>
+</body>
+</html>

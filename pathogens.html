@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>موسوعة ميكروبات الأغذية — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ٠٨ — الموسوعة المرجعية</span>
+    <h1>🦠 موسوعة ميكروبات الأغذية والفيروسات — ٣٤ بطاقة علمية كاملة</h1>
+    <p class="muted" style="max-width:960px">
+      بطاقة لكل كائن: الشكل والحجم، مصادر التلوّث الغذائية، المرض، جرعة الإصابة، الظروف التي ينمو فيها (حرارة، pH، نشاط مائي)،
+      طرق المكافحة والوقاية، طرق الكشف المخبري، والحدود المرجعية. البطاقات مبنية على مراجع سلامة الغذاء العملية ومصمّمة
+      لتكون مرجعك السريع أثناء الجلسة العملية والامتحان.
+    </p>
+    <div class="row mt"><span class="pill">🦠 ٣٤ كائنًا وفيروسًا</span><span class="pill">🧬 بكتيريا · فيروسات · فطريات · طفيليات · بريونات</span><span class="pill">🗂 أضف أي بطاقة لدفترك</span></div>
+  </div>
+
+  <div class="card">
+    <div id="pFilter"></div>
+  </div>
+  <div class="mt" id="pGrid"></div>
+
+  <div class="section-head"><h2>⚠️ مقارنة سريعة: أخطر خمسة في الأغذية الجاهزة</h2><span class="bar"></span></div>
+  <div class="card"><div class="tblwrap"><table>
+    <thead><tr><th>الكائن</th><th>لماذا هو خطر</th><th>أين نجده</th><th>الوقاية الأساسية</th></tr></thead>
+    <tbody>
+      <tr><td><b>Salmonella</b></td><td>ينتشر بسهولة، وبيض ودواجن ملوثة</td><td>بيض، دواجن، لحم مفروم</td><td>طهي كامل 74°م ومنع التلوث المتبادل</td></tr>
+      <tr><td><b>Listeria monocytogenes</b></td><td>ينمو في التبريد وينتقل للحمل</td><td>أجبان طرية، لحوم باردة، أسماك مدخنة</td><td>التحكم في التبريد الطويل ومسح البيئة</td></tr>
+      <tr><td><b>E. coli O157:H7</b></td><td>جرعة منخفضة جدًا وتسبب فشل كلوي</td><td>لحم مفروم، خضراوات، عصير غير مبستر</td><td>طهي المفروم جيدًا وغسل الخضراوات</td></tr>
+      <tr><td><b>Norovirus</b></td><td>18–1000 جسيم تكفي، ويقاوم الكحول نسبيًا</td><td>محار، خضراوات، أي غذاء لُمس بيد مصابة</td><td>نظافة الأيدي وإبعاد المصابين 48 ساعة</td></tr>
+      <tr><td><b>Mycotoxins (Aspergillus/Penicillium/Fusarium)</b></td><td>سموم لا تتحلّل بالحرارة</td><td>جوز وفول سوداني، ذرة، تفاح، حبوب</td><td>تجفيف وتخزين سليم وانتقاء المواد الخام</td></tr>
+    </tbody>
+  </table></div></div>
+
+  <div class="section-head"><h2>🧭 كيف تقرأ البطاقة؟</h2><span class="bar"></span></div>
+  <div class="grid g4">
+    <div class="card"><h3>🔎 الشكل والحجم</h3><p class="small muted">يفيدك في التعرف على الشريحة: كروي/عصوي/منحني، ومقارنة الحجم بالسلم الميكرومتري.</p></div>
+    <div class="card"><h3>🌡 ظروف النمو</h3><p class="small muted">الحرارة وpH والنشاط المائي — منها تستنتج أي غذاء يشكّل بيئة خطر حقيقية.</p></div>
+    <div class="card"><h3>🔬 الكشف المخبري</h3><p class="small muted">الوسط، الإثراء، التأكيد — تعرف منها لماذا نستخدم MacConkey أو XLD أو ALOA.</p></div>
+    <div class="card"><h3>📏 الحدود</h3><p class="small muted">ما القيمة المقبولة؟ ومتى نرفض الشحنة؟ (المرجع النهائي للائحة بلدك).</p></div>
+  </div>
+
+  <div class="section-head"><h2>📝 اختبر معرفتك بالكائنات</h2><span class="bar"></span></div>
+  <div id="quizBox"></div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+VL.boot();
+PAGES.pathogens(document.getElementById('pGrid'), document.getElementById('pFilter'));
+PAGES.quizWidget(document.getElementById('quizBox'), 'pathogens', 8);
+</script>
+</body>
+</html>

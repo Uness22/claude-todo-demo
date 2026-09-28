@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>التخفيف المتسلسل والعدّ وحساب CFU — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ٠٦ — العدّ الكمي</span>
+    <h1>🧪 التخفيف المتسلسل والعدّ وحساب CFU — كيف نحوّل «مستعمرة» إلى رقم قانوني</h1>
+    <p class="muted" style="max-width:940px">
+      أهم سؤال في فحص غذائي: <b>كم ميكروبًا في الغرام؟</b> الجواب يبدأ بتخفيف دقيق، وزرع حجم معلوم، وتحضين، وعدّ مستعمرات في نطاق
+      <b>30–300</b>، ثم حساب علمي. نفّذ هنا تسلسل التخفيف بنفسك، ازرع، احضن، <b>اضغط على كل مستعمرة لتعدّها</b>، ثم احسب النتيجة.
+    </p>
+    <div class="row mt"><span class="pill">🧪 تخفيف 10⁻¹ … 10⁻⁶</span><span class="pill">🧫 طبق النشر 0.1 مل</span><span class="pill">🔢 عدّ بالنقر</span><span class="pill">🧾 MPN للأنابيب الثلاثية</span></div>
+  </div>
+
+  <div class="section-head"><h2>① منصة التخفيف والزرع والعدّ</h2><span class="bar"></span></div>
+  <div id="dilMount"></div>
+  <div id="plateMount" class="mt"></div>
+
+  <div class="section-head"><h2>② تدريب الحساب: احسب CFU/غ</h2><span class="bar"></span></div>
+  <div class="grid g2">
+    <div id="cfuMount"></div>
+    <div class="card"><h3>📐 القاعدة الأساسية</h3>
+      <div class="eq">CFU/g = العدد المُعدّ ÷ (حجم المزروع × معامل التخفيف) ÷ كتلة العيّنة المعادلة لكل مل</div>
+      <ul class="list-dot small">
+        <li>العدّ الصحيح: مستعمرات منفصلة فقط، والطبق الذي فيه 30–300 مستعمرة.</li>
+        <li>إذا كان كل التخفيفات ممتلئة → أعد الفحص بتخفيفات أعلى (أضف 10⁻⁷ و10⁻⁸).</li>
+        <li>إذا لم ينمُ شيء → خفّف أقل أو أعد الإثراء.</li>
+        <li>تُكتب النتيجة بصيغة علمية دائما: 6.5 × 10⁵ CFU/g.</li>
+      </ul>
+      <div class="note w small"><b>لماذا لا نعدّ الطبق الممتلئ؟</b>لأن المستعمرات تندمج وتتنافس على الغذاء؛ فالعدد يُقلّل بشكل غير متوقّع، ويصبح الخطأ الإحصائي هائلًا.</div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>③ طريقة MPN — للأنابيب الثلاثية</h2><span class="bar"></span></div>
+  <div class="grid g2">
+    <div id="mpnMount"></div>
+    <div class="card"><h3>🧾 متى أستخدم MPN؟</h3>
+      <ul class="list-dot small">
+        <li>عندما يكون العدد الميكروبي منخفضًا جدًا (لا يمكن عدّه على الطبق).</li>
+        <li>للخلايا المتضرّرة التي يصعب نموّها على الأجار.</li>
+        <li>للكشف (Presence/Absence) أكثر من العدّ الدقيق.</li>
+      </ul>
+      <p class="small muted">مبدأ الطريقة: نزرع حجومًا متزايدة من العيّنة في أنابيب وسط سائل، ثم نسجّل نمط الأنابيب الموجبة (الغاز/العكارة) ونقرأ العدد الأكثر احتمالًا من الجداول القياسية.</p>
+      <div class="eq">مثال: نمط (3-2-1) ← MPN = 150 /غ</div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>④ الحدود المرجعية للمقارنة</h2><span class="bar"></span></div>
+  <div class="card"><div id="limitsMount"></div></div>
+
+  <div class="section-head"><h2>🎬 فيديوهات عملية للتخفيف والعدّ</h2><span class="bar"></span></div>
+  <div class="grid g3" id="vidBox"></div>
+
+  <div class="section-head"><h2>📝 اختبار التخفيف والحسابات</h2><span class="bar"></span></div>
+  <div id="quizBox"></div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="assets/js/labs-dilution.js"></script>
+<script>
+VL.boot();
+LABS.dilution(document.getElementById('dilMount'), document.getElementById('plateMount'));
+LABS.cfuCalc(document.getElementById('cfuMount'));
+LABS.mpn(document.getElementById('mpnMount'));
+LABS.limits(document.getElementById('limitsMount'));
+PAGES.videoCards(document.getElementById('vidBox'), { tags: ['تخفيف', 'عدّ', 'حساب'], n: 3 });
+PAGES.quizWidget(document.getElementById('quizBox'), 'dilution', 8);
+</script>
+</body>
+</html>

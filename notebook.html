@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دفتر المعمل — المعمل الافتراضي</title>
+<link rel="stylesheet" href="assets/css/lab.css">
+<style>
+.nbentry{border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;background:var(--panel)}
+.nbentry img{max-width:240px;border-radius:50%;border:6px solid #0b1219;box-shadow:0 8px 22px rgba(0,0,0,.5)}
+.nbentry pre{white-space:pre-wrap;word-break:break-word}
+.gridnb{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+</style>
+</head>
+<body>
+<main class="wrap page">
+  <div class="hero">
+    <span class="tag">الوحدة ١٣ — التوثيق</span>
+    <h1>🗂 دفتر المعمل — كل نتيجة سجّلتها، مرتبة وجاهزة للتسليم</h1>
+    <p class="muted" style="max-width:900px">المُختبِر الحقيقي يُقاس بدفتره لا بذاكرته. هنا يجمع التطبيق كل ما نتج عنه: حقول مجهرية بمقاساتها، نتائج صبغة جرام وتشخيص أخطائها، تسلسلات التخفيف وحسابات CFU، قراءات الأوساط، ودورات الأجهزة — مع التاريخ والساعة.</p>
+  </div>
+
+  <div class="grid g2 mb">
+    <div class="card">
+      <h3>👤 بطاقة الطالب</h3>
+      <div class="grid g2">
+        <div><label class="f">الاسم الكامل</label><input type="text" id="stName" placeholder="اسمك الثلاثي"></div>
+        <div><label class="f">الرقم الجامعي</label><input type="text" id="stId" placeholder="2024-12345"></div>
+      </div>
+      <label class="f">الدفعة / الشعبة / اسم المقرر</label><input type="text" id="stGroup" placeholder="الشعبة الثانية — ميكروبيولوجيا الغذاء">
+      <div class="row mt"><button class="btn primary" id="saveSt">💾 حفظ البيانات</button>
+      <button class="btn ghost" id="askSt">👤 تسجيل الدخول</button></div>
+      <p class="small dim mt">تُحفظ بياناتك محليًا في متصفحك فقط (لا يوجد حساب أو سيرفر).</p>
+    </div>
+    <div class="card">
+      <h3>📊 ملخص إنجازك</h3>
+      <div class="grid g4">
+        <div class="kpi card" style="padding:10px"><b data-xp>0</b><span>نقطة خبرة</span></div>
+        <div class="kpi card" style="padding:10px"><b data-level>1</b><span>المستوى</span></div>
+        <div class="kpi card" style="padding:10px"><b data-badges>0</b><span>شارة</span></div>
+        <div class="kpi card" style="padding:10px"><b id="kNb">0</b><span>نتيجة مسجّلة</span></div>
+      </div>
+      <div class="mt"><h4>تقدم الوحدات</h4><div id="progBox"></div></div>
+      <div class="mt" id="badgeBox"></div>
+    </div>
+  </div>
+
+  <div class="card mb">
+    <div class="between">
+      <div class="chips" id="nbFilter"></div>
+      <div class="row">
+        <button class="btn sm" id="nbPrint">🖨 طباعة / PDF</button>
+        <button class="btn sm ghost" id="nbTxt">⬇ تصدير نصي</button>
+        <button class="btn sm ghost" id="nbCsv">⬇ تصدير CSV</button>
+        <button class="btn sm red" id="nbClear">🗑 تفريغ الدفتر</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="nbBody" class="gridnb"></div>
+
+  <div class="section-head"><h2>✅ كيف تكتب تقريرًا مقبولًا؟</h2><span class="bar"></span></div>
+  <div class="grid g3">
+    <div class="card"><h3>البنية</h3><ul class="list-dot small"><li>عنوان الجلسة والهدف</li><li>المواد والخطوات بالوقت</li><li>النتائج بالأرقام والصور</li><li>الحسابات ثم الاستنتاج</li><li>المصادر والتوصيات</li></ul></div>
+    <div class="card"><h3>الدقة</h3><ul class="list-dot small"><li>اكتب الوحدات دائمًا (CFU/g، µm، °م)</li><li>لا تُدوّر قبل النهاية</li><li>بيّن التكرارات والانحراف</li><li>لا تُخفِ النتائج غير المتوقعة — حلّلها</li></ul></div>
+    <div class="card"><h3>الأمانة العلمية</h3><ul class="list-dot small"><li>لا تنسخ نتيجة زميل — سيظهر الفرق في القياسات</li><li>وثّق أي خطأ وصحّحه</li><li>اذكر إذا كانت النتيجة غير مقبولة تحليليًا</li></ul></div>
+  </div>
+</main>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/microbes.js"></script>
+<script src="assets/js/microscope.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/pages.js"></script>
+<script>
+VL.boot();
+const KIND = { field: '🔬 حقل مجهري', gram: '🎨 صبغة جرام', dilution: '🧪 تخفيف وعدّ', cfu: '🧾 حساب CFU', media: '🧫 قراءة/تحضير وسط', machine: '⚙️ تشغيل جهاز', card: '🦠 بطاقة ميكروب', session: '📚 جلسة عملية' };
+const MODS = [['microscope','المجهر'],['gram','صبغة جرام'],['bench','الزرع والتقنيات'],['dilution','التخفيف والعدّ'],['media','الأوساط والقراءة'],['instruments','الأجهزة'],['safety','السلامة']];
+
+const st = VL.store.name();
+if (st.name) document.getElementById('stName').value = st.name;
+if (st.id) document.getElementById('stId').value = st.id;
+if (st.group) document.getElementById('stGroup').value = st.group;
+document.getElementById('saveSt').onclick = () => {
+  VL.store.setName({
+    name: document.getElementById('stName').value.trim(),
+    id: document.getElementById('stId').value.trim(),
+    group: document.getElementById('stGroup').value.trim()
+  });
+  VL.UI.toast('تم حفظ بياناتك ✔ ستظهر في التقارير والشهادة', 'g');
+};
+document.getElementById('askSt').onclick = () => VL.UI.requireStudent(() => location.reload());
+
+document.getElementById('progBox').innerHTML = MODS.map(([k, t]) => {
+  const p = VL.store.getModule(k);
+  return '<div class="mb"><div class="between"><span class="small">' + t + '</span><span class="small ' + (p >= 100 ? '' : 'muted') + '">' + p + '%</span></div><div class="prog"><i style="width:' + p + '%"></i></div></div>';
+}).join('');
+document.getElementById('badgeBox').innerHTML = VL.store.badges().length
+  ? '<h4>🎖️ شاراتك</h4><div class="chips">' + VL.store.badges().map(b => '<span class="pill">🎖️ ' + VL.esc(b.title) + '</span>').join('') + '</div>'
+  : '<p class="small muted">لا شارات بعد — أتقن وحدة المجهر أو صبغة جرام أو حقّق ٨٠% في أي اختبار لتحصل على أول شارة.</p>';
+
+let filter = 'all';
+function render() {
+  const all = VL.notebook.all();
+  document.getElementById('kNb').textContent = all.length;
+  const sessions = Array.from(new Set(all.map(n => n.session)));
+  const shown = all.filter(n => filter === 'all' || n.session === filter);
+  document.getElementById('nbFilter').innerHTML = '<button class="chip' + (filter === 'all' ? ' on' : '') + '" data-f="all">الكل (' + all.length + ')</button>' +
+    sessions.map(s => '<button class="chip' + (filter === s ? ' on' : '') + '" data-f="' + VL.esc(s) + '">' + VL.esc(s) + ' (' + VL.notebook.bySession(s).length + ')</button>').join('');
+  document.getElementById('nbBody').innerHTML = shown.length ? shown.map(n =>
+    '<article class="nbentry"><div class="between"><div class="row"><span class="badge c">' + (KIND[n.kind] || 'ملاحظة') + '</span><b>' + VL.esc(n.title) + '</b></div>' +
+    '<span class="tiny dim">' + new Date(n.at).toLocaleString('ar-EG', { dateStyle: 'medium', timeStyle: 'short' }) + '</span></div>' +
+    '<p class="small mt">' + VL.esc(n.summary || '') + '</p>' +
+    (n.img ? '<img src="' + n.img + '" alt="حقل مجهري">' : '') +
+    (n.data ? '<details class="mt"><summary class="small dim">بيانات تفصيلية</summary><pre class="screen">' + VL.esc(JSON.stringify(n.data, null, 1)) + '</pre></details>' : '') +
+    '<div class="row mt"><button class="btn xs ghost" data-del="' + n.id + '">حذف</button></div></article>').join('')
+    : '<div class="card"><p class="muted">لا نتائج في هذا التصنيف بعد. ابدأ من <a href="microscope.html">المجهر</a> أو <a href="gram.html">صبغة جرام</a> أو <a href="dilution.html">التخفيف والعدّ</a>.</p></div>';
+  document.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { filter = b.getAttribute('data-f'); render(); });
+  document.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { VL.notebook.remove(b.getAttribute('data-del')); render(); });
+}
+render();
+
+document.getElementById('nbPrint').onclick = () => {
+  const w = window.open('', '_blank');
+  const rows = VL.notebook.all().map(n => '<div style="border:1px solid #bbb;padding:10px;margin:10px 0;font-family:Tahoma;page-break-inside:avoid">' +
+    '<b>' + VL.esc(n.title) + '</b> — <small>' + (KIND[n.kind] || '') + ' — ' + new Date(n.at).toLocaleString('ar-EG') + '</small><br><small>' + VL.esc(n.summary || '') + '</small>' +
+    (n.img ? '<br><img src="' + n.img + '" style="width:200px;border-radius:50%">' : '') + '</div>').join('');
+  w.document.write('<html dir="rtl" lang="ar"><head><meta charset="utf-8"><title>دفتر المعمل</title></head><body style="font-family:Tahoma;padding:24px">' +
+    '<h2>دفتر المعمل — ميكروبيولوجيا الغذاء</h2><p>الطالب: ' + VL.esc(st.name || '—') + ' · الرقم: ' + VL.esc(st.id || '—') + ' · الشعبة: ' + VL.esc(st.group || '—') + '<br>عدد النتائج: ' + VL.notebook.all().length + ' · نقاط الخبرة: ' + VL.store.xp() + ' · التاريخ: ' + new Date().toLocaleString('ar-EG') + '</p>' + rows + '</body></html>');
+  w.document.close(); setTimeout(() => w.print(), 700);
+};
+document.getElementById('nbTxt').onclick = () => {
+  const lines = ['دفتر المعمل — ميكروبيولوجيا الغذاء', 'الطالب: ' + (st.name || '—') + ' | ' + (st.id || '') + ' | ' + (st.group || ''), '='.repeat(70)];
+  VL.notebook.all().forEach(n => lines.push('\n[' + new Date(n.at).toLocaleString('ar-EG') + '] ' + (KIND[n.kind] || '') + ' — ' + n.title + '\n' + (n.summary || '')));
+  VL.download('دفتر-المعمل.txt', lines.join('\n'));
+};
+document.getElementById('nbCsv').onclick = () => {
+  const rows = [['التاريخ', 'النوع', 'العنوان', 'الملخص']].concat(VL.notebook.all().map(n => [new Date(n.at).toISOString(), KIND[n.kind] || '', n.title, (n.summary || '').replace(/"/g, '""')]));
+  VL.download('دفتر-المعمل.csv', '\ufeff' + rows.map(r => r.map(c => '"' + c + '"').join(',')).join('\n'), 'text/csv;charset=utf-8');
+};
+document.getElementById('nbClear').onclick = () => { if (confirm('سيتم حذف كل نتائج الدفتر نهائيًا. متابعة؟')) { VL.notebook.clear(); render(); } };
+</script>
+</body>
+</html>

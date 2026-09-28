@@ -1,0 +1,7 @@
+# أدوات التطوير والاختبار (ليست جزءًا من الموقع)
+node_modules/
+package.json
+package-lock.json
+.venv/
+__pycache__/
+.DS_Store
