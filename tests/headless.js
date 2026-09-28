@@ -196,6 +196,17 @@ const scenarios = {
     click("#gFinish"); await wait(600);
     if (au && !/gram\.res1\.mp3$/.test(au.src || "")) errs.push("لم يُشغَّل مقطع حكم النتيجة (src=" + au.src + ")");
     click("#gSave"); await wait(300); click(".modal .x");
+    /* اللغة الإنجليزية: يجب أن تُشغَّل مقاطع en/gram.* */
+    const langBtn = Array.from(window.document.querySelectorAll("[data-lang]")).find(b => b.getAttribute("data-lang") === "en");
+    if (langBtn) {
+      langBtn.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+      await wait(120);
+      window.VL.say("gram.s4"); await wait(120);
+      const au2 = window.document.querySelector("audio");
+      if (!au2 || !/audio\/en\/gram\.s4\.mp3$/.test(au2.src || "")) errs.push("التعليق الإنجليزي لم يُشغَّل (src=" + (au2 && au2.src) + ")");
+      window.VL.say("gram.s2"); await wait(120);
+      if (!/audio\/en\/gram\.s2\.mp3$/.test((window.document.querySelector("audio") || {}).src || "")) errs.push("انتقال مقطع إنجليزي آخر فشل");
+    }
   },
   "media.html": async ({ $, $$, click, setVal, wait }) => {
     setVal("#mpGuess", "11.75"); setVal("#mpVes", "33"); click("#mpCheck");

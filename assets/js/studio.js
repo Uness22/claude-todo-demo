@@ -219,6 +219,9 @@
     "dilution.html":   { ar: "assets/audio/ar/dilution.mp3",        en: "assets/audio/en/dilution.mp3" },
     "bench.html":      { ar: "assets/audio/ar/bench.mp3",           en: "assets/audio/en/bench.mp3" },
     "microscope.html": { ar: "assets/audio/ar/microscope.mp3",      en: "assets/audio/en/microscope.mp3" },
+    /* عربي — إكمال خطوات الزرع والعقم (دفعة 4) */
+    "bench.quad": { ar: "assets/audio/ar/bench.quad.mp3" },
+    "bench.incub": { ar: "assets/audio/ar/bench.incub.mp3" },
     /* عربي — أحكام الخطأ في الصبغة + خطوات الزرع والعقم (دفعة 3) */
     "gram.res2": { ar: "assets/audio/ar/gram.res2.mp3" },
     "gram.res3": { ar: "assets/audio/ar/gram.res3.mp3" },
@@ -240,6 +243,15 @@
     "gram.s6": { ar: "assets/audio/ar/gram.s6.mp3" },
     "gram.s7": { ar: "assets/audio/ar/gram.s7.mp3" },
     "gram.res1": { ar: "assets/audio/ar/gram.res1.mp3" },
+    /* إنجليزي + عربي — خطوات صبغة جرام (دفعة 4) */
+    "gram.s0": { en: "assets/audio/en/gram.s0.mp3", ar: "assets/audio/ar/gram.s0.mp3" },
+    "gram.s1": { en: "assets/audio/en/gram.s1.mp3", ar: "assets/audio/ar/gram.s1.mp3" },
+    "gram.s2": { en: "assets/audio/en/gram.s2.mp3", ar: "assets/audio/ar/gram.s2.mp3" },
+    "gram.s3": { en: "assets/audio/en/gram.s3.mp3", ar: "assets/audio/ar/gram.s3.mp3" },
+    "gram.s4": { en: "assets/audio/en/gram.s4.mp3", ar: "assets/audio/ar/gram.s4.mp3" },
+    "gram.s5": { en: "assets/audio/en/gram.s5.mp3", ar: "assets/audio/ar/gram.s5.mp3" },
+    "gram.s6": { en: "assets/audio/en/gram.s6.mp3", ar: "assets/audio/ar/gram.s6.mp3" },
+    "gram.s7": { en: "assets/audio/en/gram.s7.mp3", ar: "assets/audio/ar/gram.s7.mp3" },
     /* الإنجليزية — الصفحات الثلاث المتبقية + الوحدات الإضافية */
     "safety.html":     { en: "assets/audio/en/safety.mp3",      ar: "assets/audio/ar/safety.mp3" },
     "media.html":      { en: "assets/audio/en/media.mp3",       ar: "assets/audio/ar/media.mp3" },
