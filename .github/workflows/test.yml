@@ -1,0 +1,26 @@
+name: اختبار المعمل (13 صفحة + سيناريوهات تفاعلية)
+
+# يشغّل tests/headless.js على كل تعديل: يحمّل كل صفحة، ينقر على كل محاكي،
+# ويتأكد أن مقاطع التعليق الصوتي المسجّلة هي التي تُشغَّل فعلًا.
+
+on:
+  push:
+    branches: [main, "arena/**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  headless:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: تنصيب أداة الاختبار (jsdom)
+        run: npm install jsdom --no-audit --no-fund
+
+      - name: تشغيل الاختبارات
+        run: node tests/headless.js

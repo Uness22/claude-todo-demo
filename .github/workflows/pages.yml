@@ -1,0 +1,43 @@
+name: نشر الموقع على GitHub Pages
+
+# ينشر المعمل الافتراضي تلقائيًا على رابط عام جاهز للاستخدام من أي جهاز:
+#   https://uness22.github.io/claude-todo-demo/
+# مع تفعيل Pages تلقائيًا (enablement) إن لم تكن مُفعّلة من الإعدادات.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: جلب الملفات
+        uses: actions/checkout@v4
+
+      - name: تجهيز Pages (مع محاولة التفعيل التلقائي)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: رفع الموقع كحزمة نشر
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: النشر
+        id: deployment
+        uses: actions/deploy-pages@v4
