@@ -595,16 +595,21 @@
       const vs = (W.speechSynthesis && W.speechSynthesis.getVoices()) || [];
       const ar = vs.filter(v => (v.lang || "").toLowerCase().indexOf("ar") === 0).length;
       const en = vs.filter(v => (v.lang || "").toLowerCase().indexOf("en") === 0).length;
-      const recorded = Object.keys(CLIPS).length;
-      n.innerHTML = "أصوات المتصفح المتاحة: " + ar + " عربي · " + en + " إنجليزي. " +
-        (ar === 0 ? "لا يوجد صوت عربي مثبّت — سيُستخدم الشرح المسجّل المضمّن، ويمكنك تثبيت حزمة الصوت العربي من إعدادات نظامك. " : "") +
-        "مقاطع الشرح المسجّلة: " + recorded + " وحدة.";
+      const recAr = Object.keys(CLIPS).filter(k => CLIPS[k].ar).length;
+      const recEn = Object.keys(CLIPS).filter(k => CLIPS[k].en).length;
+      n.innerHTML = "🎙 مقاطع مسجّلة بصوت راوٍ مختار: <b>" + recAr + " عربي</b> · <b>" + recEn + " إنجليزي</b> " +
+        "(الجولة، جرام، الزرع، التخفيف، المجهر). " +
+        "أصوات المتصفح الاحتياطية: " + ar + " عربي · " + en + " إنجليزي. " +
+        (voice.lang === "en" ? "الوحدات بلا مقطع إنجليزي تُقرأ بصوت المتصفح الإنجليزي. " : "") +
+        (ar === 0 && voice.lang === "ar" ? "لا صوت عربي مثبّت في نظامك — المقاطع المسجّلة تغطي الوحدات الخمس الرئيسية، ويمكنك تثبيت حزمة الصوت العربي من إعدادات النظام. " : "");
     },
     badge(on) { const f = $("#stFab"); if (f) f.classList.toggle("speaking", !!on); },
     tab() {},
     toggle(open) { this.open = open; $("#stPanel").classList.toggle("hide", !open); },
     paint() {
       const d = this.el; if (!d) return;
+      const pb = $("#stPlay");
+      if (pb) pb.innerHTML = voice.isRecorded(location.pathname.split("/").pop() || "index.html") ? "▶ اسمع الشرح (🎙 صوت مسجّل)" : "▶ اسمع الشرح (🔊 صوت المتصفح)";
       const rec0 = rec.on;
       $("#stRec").classList.toggle("hide", rec0);
       $("#stPause").classList.toggle("hide", !rec0);
@@ -638,6 +643,9 @@
     $$("[data-narrate]").forEach(b => b.onclick = () => voice.say(b.getAttribute("data-narrate")));
     /* أزرار التسجيل السريع */
     $$("[data-record]").forEach(host => host.appendChild(rec.quickButton(host.getAttribute("data-record"))));
+    /* وسم زر شرح الصفحة: مسجّل بصوت راوٍ أم صوت المتصفح */
+    const pb0 = $("#stPlay");
+    if (pb0) pb0.innerHTML = voice.isRecorded(location.pathname.split("/").pop() || "index.html") ? "▶ اسمع الشرح (🎙 صوت مسجّل)" : "▶ اسمع الشرح (🔊 صوت المتصفح)";
     /* تشغيل تلقائي للصفحة عند أول تفاعل (المتصفحات تمنع التشغيل قبل ذلك) */
     if (voice.on && LS.get("narr.autoplay", true)) {
       const once = () => {
